@@ -672,12 +672,8 @@ public class Proy extends javax.swing.JFrame {
     }//GEN-LAST:event_jb_cerrarActionPerformed
 
     private void jb_cerrarArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_cerrarArchivoActionPerformed
-        try {
-            bw.close();
-            JOptionPane.showMessageDialog(null, "Se cerro el archivo correctamente");
-        } catch (IOException ex) {
-            Logger.getLogger(Proy.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        archivo= null;
+        JOptionPane.showMessageDialog(null, "Se cerro el archivo correctamente");
     }//GEN-LAST:event_jb_cerrarArchivoActionPerformed
 
     private void jb_EliminarCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_EliminarCamposActionPerformed
@@ -754,11 +750,6 @@ public class Proy extends javax.swing.JFrame {
             if (c.size() > 10) {
                 JOptionPane.showMessageDialog(rootPane, "Hay un maximo de 10 Campos");
             }
-        }
-        try {
-            bw.write("sidda");
-        } catch (IOException ex) {
-            Logger.getLogger(Proy.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
