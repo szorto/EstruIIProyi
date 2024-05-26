@@ -672,7 +672,12 @@ public class Proy extends javax.swing.JFrame {
     }//GEN-LAST:event_jb_cerrarActionPerformed
 
     private void jb_cerrarArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_cerrarArchivoActionPerformed
-        // TODO add your handling code here:
+        try {
+            bw.close();
+            JOptionPane.showMessageDialog(null, "Se cerro el archivo correctamente");
+        } catch (IOException ex) {
+            Logger.getLogger(Proy.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jb_cerrarArchivoActionPerformed
 
     private void jb_EliminarCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_EliminarCamposActionPerformed
@@ -706,7 +711,7 @@ public class Proy extends javax.swing.JFrame {
     }//GEN-LAST:event_jb_crearCamposActionPerformed
 
     private void jcb_tipoDeDatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcb_tipoDeDatoActionPerformed
-        if (jcb_tipoDeDato.getSelectedItem().equals("Boolean")) {
+        if (jcb_tipoDeDato.getSelectedItem().equals("Boolean")||jcb_tipoDeDato.getSelectedItem().equals("Integer")||jcb_tipoDeDato.getSelectedItem().equals("Char ")||jcb_tipoDeDato.getSelectedItem().equals("Double")||jcb_tipoDeDato.getSelectedItem().equals("Float")||jcb_tipoDeDato.getSelectedItem().equals("Short")||jcb_tipoDeDato.getSelectedItem().equals("Byte")) {
             jl_llavePrimaria.setForeground(Color.gray);
             jl_longitud.setForeground(Color.gray);
             jcb_llavePrimaria.setEnabled(false);
@@ -749,6 +754,11 @@ public class Proy extends javax.swing.JFrame {
             if (c.size() > 10) {
                 JOptionPane.showMessageDialog(rootPane, "Hay un maximo de 10 Campos");
             }
+        }
+        try {
+            bw.write("sidda");
+        } catch (IOException ex) {
+            Logger.getLogger(Proy.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -858,7 +868,10 @@ public class Proy extends javax.swing.JFrame {
         fc.setCurrentDirectory(new File(System.getProperty("user.dir")));
         int returnValue = fc.showOpenDialog(null);
         if (returnValue == JFileChooser.APPROVE_OPTION) {
+            JOptionPane.showMessageDialog(null, "Se ha abierto el archivo correctamente");
             archivo = fc.getSelectedFile();
+        }else{
+            JOptionPane.showMessageDialog(null,"Occurio un error al tratar de abrir el archivo");
         }
     }//GEN-LAST:event_jb_abrirArchivoActionPerformed
 
