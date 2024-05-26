@@ -1,0 +1,1 @@
+campo1|String|11|false;campo2|String|1|false

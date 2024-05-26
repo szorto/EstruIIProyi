@@ -863,20 +863,27 @@ public class Proy extends javax.swing.JFrame {
     }//GEN-LAST:event_jb_abrirArchivoActionPerformed
 
     private void jb_salvarArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_salvarArchivoActionPerformed
-        String escribir;
+        String escribir = "";
         if (archivo == null) {
             JOptionPane.showMessageDialog(null, "Debe crear o abrir un archivo");
         } else {
-            
-            for (int i = 0; i < c.size(); i++) {
-                escribir += c.get(i).getNombre() + "|";
+            if (!c.isEmpty()) {
+                for (int i = 0; i < c.size(); i++) {
+                    escribir += c.get(i).getNombre() + "|" + c.get(i).getTipo() + "|" + c.get(i).getLongitud() + "|" + c.get(i).isLlaveP();
+                    if(!(i == c.size() - 1)){
+                        escribir += ";";
+                    }
+                }
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(archivo))) {
+                    bw.write(escribir);
+                    System.out.println("File written successfully.");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }else{
+                JOptionPane.showMessageDialog(null, "Debe crear Campos");
             }
-            try (BufferedWriter bw = new BufferedWriter(new FileWriter(archivo))) {
-                bw.write("lasdasd");
-                System.out.println("File written successfully.");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+
         }
     }//GEN-LAST:event_jb_salvarArchivoActionPerformed
 
