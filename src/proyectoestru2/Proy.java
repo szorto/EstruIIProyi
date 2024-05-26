@@ -176,9 +176,7 @@ public class Proy extends javax.swing.JFrame {
                     .addGroup(jp_seleccionLayout.createSequentialGroup()
                         .addGap(48, 48, 48)
                         .addComponent(jb_cerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jp_seleccionLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jButton7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         jp_seleccionLayout.setVerticalGroup(
@@ -385,6 +383,22 @@ public class Proy extends javax.swing.JFrame {
         jtf_nombreCampo.setBackground(new java.awt.Color(51, 51, 51));
         jtf_nombreCampo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jtf_nombreCampo.setForeground(new java.awt.Color(204, 204, 204));
+        jtf_nombreCampo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtf_nombreCampoActionPerformed(evt);
+            }
+        });
+        jtf_nombreCampo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jtf_nombreCampoKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtf_nombreCampoKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtf_nombreCampoKeyTyped(evt);
+            }
+        });
 
         jl_longitud.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jl_longitud.setForeground(new java.awt.Color(255, 255, 255));
@@ -890,6 +904,22 @@ public class Proy extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_jb_salvarArchivoActionPerformed
+
+    private void jtf_nombreCampoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtf_nombreCampoActionPerformed
+      // js_longitud.setValue(((String)jtf_nombreCampo.getText()).length());
+    }//GEN-LAST:event_jtf_nombreCampoActionPerformed
+
+    private void jtf_nombreCampoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_nombreCampoKeyTyped
+       //js_longitud.setValue(((String)jtf_nombreCampo.getText()).length());
+    }//GEN-LAST:event_jtf_nombreCampoKeyTyped
+
+    private void jtf_nombreCampoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_nombreCampoKeyPressed
+      // js_longitud.setValue(((String)jtf_nombreCampo.getText()).length());
+    }//GEN-LAST:event_jtf_nombreCampoKeyPressed
+
+    private void jtf_nombreCampoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_nombreCampoKeyReleased
+       js_longitud.setValue(((String)jtf_nombreCampo.getText()).length());
+    }//GEN-LAST:event_jtf_nombreCampoKeyReleased
 
     /**
      * @param args the command line arguments
