@@ -739,15 +739,15 @@ public class Proy extends javax.swing.JFrame {
             jcb_llavePrimaria.setEnabled(true);
             js_longitud.setEnabled(true);
         }
-        if(jcb_tipoDeDato.getSelectedItem().equals("Integer")||jcb_tipoDeDato.getSelectedItem().equals("Double")||jcb_tipoDeDato.getSelectedItem().equals("Float")||jcb_tipoDeDato.getSelectedItem().equals("Short")||jcb_tipoDeDato.getSelectedItem().equals("Byte")){ //condicion para integer
-            jl_llavePrimaria.setForeground(Color.gray);
-            jl_longitud.setForeground(Color.gray);
-            jcb_llavePrimaria.setEnabled(false);
-            //js_longitud.setEnabled(true);
-            js_longitud.setValue(1);
-            jcb_llavePrimaria.setSelected(false);
-        } //else {
-//            jl_llavePrimaria.setForeground(Color.white);
+//        if(jcb_tipoDeDato.getSelectedItem().equals("Integer")||jcb_tipoDeDato.getSelectedItem().equals("Double")||jcb_tipoDeDato.getSelectedItem().equals("Float")||jcb_tipoDeDato.getSelectedItem().equals("Short")||jcb_tipoDeDato.getSelectedItem().equals("Byte")){ //condicion para integer
+//            jl_llavePrimaria.setForeground(Color.gray);
+//            jl_longitud.setForeground(Color.gray);
+//            jcb_llavePrimaria.setEnabled(false);
+//            //js_longitud.setEnabled(true);
+//            js_longitud.setValue(1);
+//            jcb_llavePrimaria.setSelected(false);
+//        } //else {
+////            jl_llavePrimaria.setForeground(Color.white);
 //            jl_longitud.setForeground(Color.white);
 //            jcb_llavePrimaria.setEnabled(true);
 //            js_longitud.setEnabled(true);
@@ -904,7 +904,9 @@ public class Proy extends javax.swing.JFrame {
         if (archivo == null) {
             JOptionPane.showMessageDialog(null, "Debe crear o abrir un archivo");
         } else {
-            if (!c.isEmpty()) {
+            for (int inicio = 0; inicio < c.size(); inicio++) {
+                if(c.contains(c)){
+                if (!c.isEmpty()) {
                 for (int i = 0; i < c.size(); i++) {
                     escribir += c.get(i).getNombre() + "|" + c.get(i).getTipo() + "|" + c.get(i).getLongitud() + "|" + c.get(i).isLlaveP();
                     if(!(i == c.size() - 1)){
@@ -917,9 +919,14 @@ public class Proy extends javax.swing.JFrame {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+                }else{
+                    JOptionPane.showMessageDialog(null, "Debe crear Campos");
+                }
             }else{
-                JOptionPane.showMessageDialog(null, "Debe crear Campos");
+                JOptionPane.showMessageDialog(null, "Se necesita una llave primaria para guardar el archivo");
             }
+            }
+            
 
         }
     }//GEN-LAST:event_jb_salvarArchivoActionPerformed
