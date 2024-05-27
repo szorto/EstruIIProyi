@@ -686,8 +686,13 @@ public class Proy extends javax.swing.JFrame {
     }//GEN-LAST:event_jb_cerrarActionPerformed
 
     private void jb_cerrarArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_cerrarArchivoActionPerformed
-        archivo= null;
-        JOptionPane.showMessageDialog(null, "Se cerro el archivo correctamente");
+        if(archivo != null){
+            archivo= null;
+            JOptionPane.showMessageDialog(null, "Se cerro el archivo correctamente");
+        }else{
+            JOptionPane.showMessageDialog(null, "No hay un archivo abierto actualmente para cerrarlo");
+        }
+        
     }//GEN-LAST:event_jb_cerrarArchivoActionPerformed
 
     private void jb_EliminarCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_EliminarCamposActionPerformed
@@ -721,7 +726,7 @@ public class Proy extends javax.swing.JFrame {
     }//GEN-LAST:event_jb_crearCamposActionPerformed
 
     private void jcb_tipoDeDatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcb_tipoDeDatoActionPerformed
-        if (jcb_tipoDeDato.getSelectedItem().equals("Boolean")||jcb_tipoDeDato.getSelectedItem().equals("Integer")||jcb_tipoDeDato.getSelectedItem().equals("Char ")||jcb_tipoDeDato.getSelectedItem().equals("Double")||jcb_tipoDeDato.getSelectedItem().equals("Float")||jcb_tipoDeDato.getSelectedItem().equals("Short")||jcb_tipoDeDato.getSelectedItem().equals("Byte")) {
+        if (jcb_tipoDeDato.getSelectedItem().equals("Boolean")||jcb_tipoDeDato.getSelectedItem().equals("Char ")) {
             jl_llavePrimaria.setForeground(Color.gray);
             jl_longitud.setForeground(Color.gray);
             jcb_llavePrimaria.setEnabled(false);
@@ -734,6 +739,20 @@ public class Proy extends javax.swing.JFrame {
             jcb_llavePrimaria.setEnabled(true);
             js_longitud.setEnabled(true);
         }
+        if(jcb_tipoDeDato.getSelectedItem().equals("Integer")||jcb_tipoDeDato.getSelectedItem().equals("Double")||jcb_tipoDeDato.getSelectedItem().equals("Float")||jcb_tipoDeDato.getSelectedItem().equals("Short")||jcb_tipoDeDato.getSelectedItem().equals("Byte")){ //condicion para integer
+            jl_llavePrimaria.setForeground(Color.gray);
+            jl_longitud.setForeground(Color.gray);
+            jcb_llavePrimaria.setEnabled(false);
+            //js_longitud.setEnabled(true);
+            js_longitud.setValue(1);
+            jcb_llavePrimaria.setSelected(false);
+        } //else {
+//            jl_llavePrimaria.setForeground(Color.white);
+//            jl_longitud.setForeground(Color.white);
+//            jcb_llavePrimaria.setEnabled(true);
+//            js_longitud.setEnabled(true);
+//        }
+        
     }//GEN-LAST:event_jcb_tipoDeDatoActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -918,7 +937,7 @@ public class Proy extends javax.swing.JFrame {
     }//GEN-LAST:event_jtf_nombreCampoKeyPressed
 
     private void jtf_nombreCampoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_nombreCampoKeyReleased
-       js_longitud.setValue(((String)jtf_nombreCampo.getText()).length());
+       //js_longitud.setValue(((String)jtf_nombreCampo.getText()).length());
     }//GEN-LAST:event_jtf_nombreCampoKeyReleased
 
     /**
