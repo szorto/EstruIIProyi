@@ -810,6 +810,7 @@ public class Proy extends javax.swing.JFrame {
                 temp[2] = c.get(i).getLongitud();
                 temp[3] = c.get(i).isLlaveP();
                 tm.addRow(temp);
+                //hola :3
             }
             jtb_Campos.setSelectedIndex(1);
         }
