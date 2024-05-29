@@ -752,7 +752,11 @@ public class Proy extends javax.swing.JFrame {
 //            js_longitud.setValue(1);
 //            jcb_llavePrimaria.setSelected(false);
 //        } //else {
+<<<<<<< HEAD
 //            jl_llavePrimaria.setForeground(Color.white);
+=======
+////            jl_llavePrimaria.setForeground(Color.white);
+>>>>>>> 6b062e34182ca62ec91e3941bbac23ba63b3f8aa
 //            jl_longitud.setForeground(Color.white);
 //            jcb_llavePrimaria.setEnabled(true);
 //            js_longitud.setEnabled(true);
@@ -924,6 +928,7 @@ public class Proy extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Debe crear o abrir un archivo");
         
         } else {
+<<<<<<< HEAD
             if (!c.isEmpty()) {
                 if (check) {
                     for (int i = 0; i < c.size(); i++) {
@@ -931,6 +936,15 @@ public class Proy extends javax.swing.JFrame {
                         if (!(i == c.size() - 1)) {
                             escribir += ";";
                         }
+=======
+            for (int inicio = 0; inicio < c.size(); inicio++) {
+                if(c.contains(c)){
+                if (!c.isEmpty()) {
+                for (int i = 0; i < c.size(); i++) {
+                    escribir += c.get(i).getNombre() + "|" + c.get(i).getTipo() + "|" + c.get(i).getLongitud() + "|" + c.get(i).isLlaveP();
+                    if(!(i == c.size() - 1)){
+                        escribir += ";";
+>>>>>>> 6b062e34182ca62ec91e3941bbac23ba63b3f8aa
                     }
                     try (BufferedWriter bw = new BufferedWriter(new FileWriter(archivo))) {
                         bw.write(escribir);
@@ -941,10 +955,26 @@ public class Proy extends javax.swing.JFrame {
                 } else {
                     JOptionPane.showMessageDialog(this, "Debe haber una llave primaria");
                 }
+<<<<<<< HEAD
 
             } else {
                 JOptionPane.showMessageDialog(null, "Debe crear Campos");
+=======
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(archivo))) {
+                    bw.write(escribir);
+                    System.out.println("File written successfully.");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                }else{
+                    JOptionPane.showMessageDialog(null, "Debe crear Campos");
+                }
+            }else{
+                JOptionPane.showMessageDialog(null, "Se necesita una llave primaria para guardar el archivo");
+>>>>>>> 6b062e34182ca62ec91e3941bbac23ba63b3f8aa
             }
+            }
+            
 
         }
     }//GEN-LAST:event_jb_salvarArchivoActionPerformed
