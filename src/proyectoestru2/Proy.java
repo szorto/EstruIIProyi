@@ -672,8 +672,13 @@ public class Proy extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jb_camposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_camposActionPerformed
-        Menu.setSelectedIndex(1);
-        MenuMenus.setSelectedIndex(1);
+        if (archivo == null) {
+            JOptionPane.showMessageDialog(this, "Debe abrir o crear un archivo");
+        } else {
+            Menu.setSelectedIndex(1);
+            MenuMenus.setSelectedIndex(1);
+        }
+
     }//GEN-LAST:event_jb_camposActionPerformed
 
     private void jb_indicesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_indicesActionPerformed
@@ -686,13 +691,13 @@ public class Proy extends javax.swing.JFrame {
     }//GEN-LAST:event_jb_cerrarActionPerformed
 
     private void jb_cerrarArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_cerrarArchivoActionPerformed
-        if(archivo != null){
-            archivo= null;
+        if (archivo != null) {
+            archivo = null;
             JOptionPane.showMessageDialog(null, "Se cerro el archivo correctamente");
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "No hay un archivo abierto actualmente para cerrarlo");
         }
-        
+
     }//GEN-LAST:event_jb_cerrarArchivoActionPerformed
 
     private void jb_EliminarCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_EliminarCamposActionPerformed
@@ -726,7 +731,7 @@ public class Proy extends javax.swing.JFrame {
     }//GEN-LAST:event_jb_crearCamposActionPerformed
 
     private void jcb_tipoDeDatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcb_tipoDeDatoActionPerformed
-        if (jcb_tipoDeDato.getSelectedItem().equals("Boolean")||jcb_tipoDeDato.getSelectedItem().equals("Char ")) {
+        if (jcb_tipoDeDato.getSelectedItem().equals("Boolean") || jcb_tipoDeDato.getSelectedItem().equals("Char ")) {
             jl_llavePrimaria.setForeground(Color.gray);
             jl_longitud.setForeground(Color.gray);
             jcb_llavePrimaria.setEnabled(false);
@@ -739,24 +744,30 @@ public class Proy extends javax.swing.JFrame {
             jcb_llavePrimaria.setEnabled(true);
             js_longitud.setEnabled(true);
         }
-        if(jcb_tipoDeDato.getSelectedItem().equals("Integer")||jcb_tipoDeDato.getSelectedItem().equals("Double")||jcb_tipoDeDato.getSelectedItem().equals("Float")||jcb_tipoDeDato.getSelectedItem().equals("Short")||jcb_tipoDeDato.getSelectedItem().equals("Byte")){ //condicion para integer
-            jl_llavePrimaria.setForeground(Color.gray);
-            jl_longitud.setForeground(Color.gray);
-            jcb_llavePrimaria.setEnabled(false);
-            //js_longitud.setEnabled(true);
-            js_longitud.setValue(1);
-            jcb_llavePrimaria.setSelected(false);
-        } //else {
+//        if(jcb_tipoDeDato.getSelectedItem().equals("Integer")||jcb_tipoDeDato.getSelectedItem().equals("Double")||jcb_tipoDeDato.getSelectedItem().equals("Float")||jcb_tipoDeDato.getSelectedItem().equals("Short")||jcb_tipoDeDato.getSelectedItem().equals("Byte")){ //condicion para integer
+//            jl_llavePrimaria.setForeground(Color.gray);
+//            jl_longitud.setForeground(Color.gray);
+//            jcb_llavePrimaria.setEnabled(false);
+//            //js_longitud.setEnabled(true);
+//            js_longitud.setValue(1);
+//            jcb_llavePrimaria.setSelected(false);
+//        } //else {
 //            jl_llavePrimaria.setForeground(Color.white);
 //            jl_longitud.setForeground(Color.white);
 //            jcb_llavePrimaria.setEnabled(true);
 //            js_longitud.setEnabled(true);
 //        }
-        
+
     }//GEN-LAST:event_jcb_tipoDeDatoActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         boolean check = true;
+        for (int i = 0; i < c.size(); i++) {
+            if(jtf_nombreCampo.getText().equals(c.get(i).getNombre())){
+                JOptionPane.showMessageDialog(this, "El nombre ya esta usado");
+                check = false;
+            }
+        }
         if (jtf_nombreCampo.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "El campo debe tener un nombre");
             check = false;
@@ -874,6 +885,7 @@ public class Proy extends javax.swing.JFrame {
 
     private void jb_nuevoArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_nuevoArchivoActionPerformed
         String nombre = JOptionPane.showInputDialog(null, "Ingrese el nombre del archivo");
+        delim = JOptionPane.showInputDialog(null, "Ingrese el nombre del archivo");
         archivo = new File("./" + nombre + ".txt");
         System.out.println(nombre);
         try {
@@ -894,30 +906,42 @@ public class Proy extends javax.swing.JFrame {
         if (returnValue == JFileChooser.APPROVE_OPTION) {
             JOptionPane.showMessageDialog(null, "Se ha abierto el archivo correctamente");
             archivo = fc.getSelectedFile();
-        }else{
-            JOptionPane.showMessageDialog(null,"Occurio un error al tratar de abrir el archivo");
+        } else {
+            JOptionPane.showMessageDialog(null, "Occurio un error al tratar de abrir el archivo");
         }
     }//GEN-LAST:event_jb_abrirArchivoActionPerformed
 
     private void jb_salvarArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_salvarArchivoActionPerformed
         String escribir = "";
+        boolean check = false;
+        for (int i = 0; i < c.size(); i++) {
+            if (c.get(i).isLlaveP()) {
+                check = true;
+            }
+        }
         if (archivo == null) {
             JOptionPane.showMessageDialog(null, "Debe crear o abrir un archivo");
+        
         } else {
             if (!c.isEmpty()) {
-                for (int i = 0; i < c.size(); i++) {
-                    escribir += c.get(i).getNombre() + "|" + c.get(i).getTipo() + "|" + c.get(i).getLongitud() + "|" + c.get(i).isLlaveP();
-                    if(!(i == c.size() - 1)){
-                        escribir += ";";
+                if (check) {
+                    for (int i = 0; i < c.size(); i++) {
+                        escribir += c.get(i).getNombre() + "|" + c.get(i).getTipo() + "|" + c.get(i).getLongitud() + delim + c.get(i).isLlaveP();
+                        if (!(i == c.size() - 1)) {
+                            escribir += ";";
+                        }
                     }
+                    try (BufferedWriter bw = new BufferedWriter(new FileWriter(archivo))) {
+                        bw.write(escribir);
+                        System.out.println("File written successfully.");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "Debe haber una llave primaria");
                 }
-                try (BufferedWriter bw = new BufferedWriter(new FileWriter(archivo))) {
-                    bw.write(escribir);
-                    System.out.println("File written successfully.");
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }else{
+
+            } else {
                 JOptionPane.showMessageDialog(null, "Debe crear Campos");
             }
 
@@ -925,19 +949,19 @@ public class Proy extends javax.swing.JFrame {
     }//GEN-LAST:event_jb_salvarArchivoActionPerformed
 
     private void jtf_nombreCampoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtf_nombreCampoActionPerformed
-      // js_longitud.setValue(((String)jtf_nombreCampo.getText()).length());
+        // js_longitud.setValue(((String)jtf_nombreCampo.getText()).length());
     }//GEN-LAST:event_jtf_nombreCampoActionPerformed
 
     private void jtf_nombreCampoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_nombreCampoKeyTyped
-       //js_longitud.setValue(((String)jtf_nombreCampo.getText()).length());
+        //js_longitud.setValue(((String)jtf_nombreCampo.getText()).length());
     }//GEN-LAST:event_jtf_nombreCampoKeyTyped
 
     private void jtf_nombreCampoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_nombreCampoKeyPressed
-      // js_longitud.setValue(((String)jtf_nombreCampo.getText()).length());
+        // js_longitud.setValue(((String)jtf_nombreCampo.getText()).length());
     }//GEN-LAST:event_jtf_nombreCampoKeyPressed
 
     private void jtf_nombreCampoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtf_nombreCampoKeyReleased
-       //js_longitud.setValue(((String)jtf_nombreCampo.getText()).length());
+        //js_longitud.setValue(((String)jtf_nombreCampo.getText()).length());
     }//GEN-LAST:event_jtf_nombreCampoKeyReleased
 
     /**
@@ -1029,4 +1053,5 @@ public class Proy extends javax.swing.JFrame {
     ArrayList<Campos> c = new ArrayList();
     File archivo;
     BufferedWriter bw;
+    String delim;
 }
