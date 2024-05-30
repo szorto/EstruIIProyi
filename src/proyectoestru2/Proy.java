@@ -744,23 +744,7 @@ public class Proy extends javax.swing.JFrame {
             jcb_llavePrimaria.setEnabled(true);
             js_longitud.setEnabled(true);
         }
-//        if(jcb_tipoDeDato.getSelectedItem().equals("Integer")||jcb_tipoDeDato.getSelectedItem().equals("Double")||jcb_tipoDeDato.getSelectedItem().equals("Float")||jcb_tipoDeDato.getSelectedItem().equals("Short")||jcb_tipoDeDato.getSelectedItem().equals("Byte")){ //condicion para integer
-//            jl_llavePrimaria.setForeground(Color.gray);
-//            jl_longitud.setForeground(Color.gray);
-//            jcb_llavePrimaria.setEnabled(false);
-//            //js_longitud.setEnabled(true);
-//            js_longitud.setValue(1);
-//            jcb_llavePrimaria.setSelected(false);
-//        } //else {
-<<<<<<< HEAD
-//            jl_llavePrimaria.setForeground(Color.white);
-=======
-////            jl_llavePrimaria.setForeground(Color.white);
->>>>>>> 6b062e34182ca62ec91e3941bbac23ba63b3f8aa
-//            jl_longitud.setForeground(Color.white);
-//            jcb_llavePrimaria.setEnabled(true);
-//            js_longitud.setEnabled(true);
-//        }
+
 
     }//GEN-LAST:event_jcb_tipoDeDatoActionPerformed
 
@@ -917,7 +901,7 @@ public class Proy extends javax.swing.JFrame {
     }//GEN-LAST:event_jb_abrirArchivoActionPerformed
 
     private void jb_salvarArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_salvarArchivoActionPerformed
-        String escribir = "";
+                String escribir = "";
         boolean check = false;
         for (int i = 0; i < c.size(); i++) {
             if (c.get(i).isLlaveP()) {
@@ -926,9 +910,8 @@ public class Proy extends javax.swing.JFrame {
         }
         if (archivo == null) {
             JOptionPane.showMessageDialog(null, "Debe crear o abrir un archivo");
-        
+
         } else {
-<<<<<<< HEAD
             if (!c.isEmpty()) {
                 if (check) {
                     for (int i = 0; i < c.size(); i++) {
@@ -936,15 +919,6 @@ public class Proy extends javax.swing.JFrame {
                         if (!(i == c.size() - 1)) {
                             escribir += ";";
                         }
-=======
-            for (int inicio = 0; inicio < c.size(); inicio++) {
-                if(c.contains(c)){
-                if (!c.isEmpty()) {
-                for (int i = 0; i < c.size(); i++) {
-                    escribir += c.get(i).getNombre() + "|" + c.get(i).getTipo() + "|" + c.get(i).getLongitud() + "|" + c.get(i).isLlaveP();
-                    if(!(i == c.size() - 1)){
-                        escribir += ";";
->>>>>>> 6b062e34182ca62ec91e3941bbac23ba63b3f8aa
                     }
                     try (BufferedWriter bw = new BufferedWriter(new FileWriter(archivo))) {
                         bw.write(escribir);
@@ -955,26 +929,11 @@ public class Proy extends javax.swing.JFrame {
                 } else {
                     JOptionPane.showMessageDialog(this, "Debe haber una llave primaria");
                 }
-<<<<<<< HEAD
-
+            
+            
             } else {
                 JOptionPane.showMessageDialog(null, "Debe crear Campos");
-=======
-                try (BufferedWriter bw = new BufferedWriter(new FileWriter(archivo))) {
-                    bw.write(escribir);
-                    System.out.println("File written successfully.");
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                }else{
-                    JOptionPane.showMessageDialog(null, "Debe crear Campos");
-                }
-            }else{
-                JOptionPane.showMessageDialog(null, "Se necesita una llave primaria para guardar el archivo");
->>>>>>> 6b062e34182ca62ec91e3941bbac23ba63b3f8aa
             }
-            }
-            
 
         }
     }//GEN-LAST:event_jb_salvarArchivoActionPerformed
