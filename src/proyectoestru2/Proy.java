@@ -67,6 +67,12 @@ public class Proy extends javax.swing.JFrame {
         jb_modificarCampos = new javax.swing.JButton();
         jb_EliminarCampos = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
+        jPanel7 = new javax.swing.JPanel();
+        jb_nuevoArchivo1 = new javax.swing.JButton();
+        jb_abrirArchivo1 = new javax.swing.JButton();
+        jb_salvarArchivo1 = new javax.swing.JButton();
+        jb_cerrarArchivo1 = new javax.swing.JButton();
+        jb_cerrarArchivo2 = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         MenuMenus = new javax.swing.JTabbedPane();
@@ -321,15 +327,94 @@ public class Proy extends javax.swing.JFrame {
 
         Menu.addTab("tab2", jPanel1);
 
+        jPanel3.setBackground(new java.awt.Color(102, 102, 102));
+
+        jPanel7.setBackground(new java.awt.Color(102, 102, 102));
+
+        jb_nuevoArchivo1.setText("Introducir");
+        jb_nuevoArchivo1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_nuevoArchivo1ActionPerformed(evt);
+            }
+        });
+
+        jb_abrirArchivo1.setText("Modificar");
+        jb_abrirArchivo1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_abrirArchivo1ActionPerformed(evt);
+            }
+        });
+
+        jb_salvarArchivo1.setText("Buscar");
+        jb_salvarArchivo1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_salvarArchivo1ActionPerformed(evt);
+            }
+        });
+
+        jb_cerrarArchivo1.setText("Eliminar");
+        jb_cerrarArchivo1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_cerrarArchivo1ActionPerformed(evt);
+            }
+        });
+
+        jb_cerrarArchivo2.setText("Listar");
+        jb_cerrarArchivo2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_cerrarArchivo2ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jb_cerrarArchivo2, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jb_cerrarArchivo1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jb_salvarArchivo1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jb_abrirArchivo1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jb_nuevoArchivo1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(30, Short.MAX_VALUE))
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jb_nuevoArchivo1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jb_abrirArchivo1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jb_salvarArchivo1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jb_cerrarArchivo1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addComponent(jb_cerrarArchivo2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 191, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel3Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 418, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel3Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         Menu.addTab("tab3", jPanel3);
@@ -1012,6 +1097,26 @@ public class Proy extends javax.swing.JFrame {
         //js_longitud.setValue(((String)jtf_nombreCampo.getText()).length());
     }//GEN-LAST:event_jtf_nombreCampoKeyReleased
 
+    private void jb_nuevoArchivo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_nuevoArchivo1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jb_nuevoArchivo1ActionPerformed
+
+    private void jb_abrirArchivo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_abrirArchivo1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jb_abrirArchivo1ActionPerformed
+
+    private void jb_salvarArchivo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_salvarArchivo1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jb_salvarArchivo1ActionPerformed
+
+    private void jb_cerrarArchivo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_cerrarArchivo1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jb_cerrarArchivo1ActionPerformed
+
+    private void jb_cerrarArchivo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_cerrarArchivo2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jb_cerrarArchivo2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1060,16 +1165,20 @@ public class Proy extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JButton jb_EliminarCampos;
     private javax.swing.JButton jb_ListarCampos;
     private javax.swing.JButton jb_abrirArchivo;
+    private javax.swing.JButton jb_abrirArchivo1;
     private javax.swing.JButton jb_archivos;
     private javax.swing.JButton jb_campos;
     private javax.swing.JButton jb_cerrar;
     private javax.swing.JButton jb_cerrarArchivo;
+    private javax.swing.JButton jb_cerrarArchivo1;
+    private javax.swing.JButton jb_cerrarArchivo2;
     private javax.swing.JButton jb_crearCampos;
     private javax.swing.JButton jb_eliminarCampo;
     private javax.swing.JButton jb_estandarizacion;
@@ -1077,8 +1186,10 @@ public class Proy extends javax.swing.JFrame {
     private javax.swing.JButton jb_modificarCampo;
     private javax.swing.JButton jb_modificarCampos;
     private javax.swing.JButton jb_nuevoArchivo;
+    private javax.swing.JButton jb_nuevoArchivo1;
     private javax.swing.JButton jb_registros;
     private javax.swing.JButton jb_salvarArchivo;
+    private javax.swing.JButton jb_salvarArchivo1;
     private javax.swing.JCheckBox jcb_llavePrimaria;
     private javax.swing.JComboBox<String> jcb_tipoDeDato;
     private javax.swing.JList<Campos> jl_eliminarCampo;
