@@ -8,8 +8,10 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -692,6 +694,11 @@ public class Proy extends javax.swing.JFrame {
 
     private void jb_cerrarArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_cerrarArchivoActionPerformed
         if (archivo != null) {
+            try {
+                archivo.close();
+            } catch (IOException ex) {
+                Logger.getLogger(Proy.class.getName()).log(Level.SEVERE, null, ex);
+            }
             archivo = null;
             JOptionPane.showMessageDialog(null, "Se cerro el archivo correctamente");
         } else {
@@ -751,7 +758,7 @@ public class Proy extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         boolean check = true;
         for (int i = 0; i < c.size(); i++) {
-            if(jtf_nombreCampo.getText().equals(c.get(i).getNombre())){
+            if (jtf_nombreCampo.getText().equals(c.get(i).getNombre())) {
                 JOptionPane.showMessageDialog(this, "El nombre ya esta usado");
                 check = false;
             }
@@ -874,11 +881,15 @@ public class Proy extends javax.swing.JFrame {
 
     private void jb_nuevoArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_nuevoArchivoActionPerformed
         String nombre = JOptionPane.showInputDialog(null, "Ingrese el nombre del archivo");
-        delim = JOptionPane.showInputDialog(null, "Ingrese el nombre del archivo");
-        archivo = new File("./" + nombre + ".txt");
+        try {
+            archivo = new RandomAccessFile("./" + nombre + ".txt", "rw");
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Proy.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        File prueba = new File("./" + nombre + ".txt");
         System.out.println(nombre);
         try {
-            if (archivo.createNewFile()) {
+            if (prueba.createNewFile()) {
                 JOptionPane.showMessageDialog(null, "Se ha creado el archivo correctamente");
             }
         } catch (IOException ex) {
@@ -894,48 +905,95 @@ public class Proy extends javax.swing.JFrame {
         int returnValue = fc.showOpenDialog(null);
         if (returnValue == JFileChooser.APPROVE_OPTION) {
             JOptionPane.showMessageDialog(null, "Se ha abierto el archivo correctamente");
-            archivo = fc.getSelectedFile();
+            try {
+                archivo = new RandomAccessFile(fc.getSelectedFile(), "rw");
+                
+                //Cargar metadata
+                //Carga los campos
+                String campos = archivo.readLine();
+                String Camp = "";
+                ArrayList atris = new ArrayList();
+                for (int i = 0; i < campos.length(); i++) {
+                    if(campos.charAt(i) == '|'){
+                        atris.add(Camp);
+                        Camp = "";
+                    }else if(campos.charAt(i) == ',' || i == campos.length() -1){
+                        m.getLista().add(new Campos((String)atris.get(0), (String)atris.get(1), Integer.parseInt((String)atris.get(2)), Boolean.parseBoolean(Camp)));
+                        Camp = "";
+                        atris = new ArrayList();
+                    }else{
+                        Camp += campos.charAt(i);
+                    }
+                }
+                //Carga el resto de los atributos
+                m.setLongitud(Integer.parseInt(archivo.readLine()));
+                m.setCantidad(Integer.parseInt(archivo.readLine()));
+                m.setCabezaA(Integer.parseInt(archivo.readLine()));
+                System.out.println(m.toString2());
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(Proy.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(Proy.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } else {
             JOptionPane.showMessageDialog(null, "Occurio un error al tratar de abrir el archivo");
         }
+        
+        
+        
     }//GEN-LAST:event_jb_abrirArchivoActionPerformed
 
     private void jb_salvarArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_salvarArchivoActionPerformed
-                String escribir = "";
-        boolean check = false;
-        for (int i = 0; i < c.size(); i++) {
-            if (c.get(i).isLlaveP()) {
-                check = true;
-            }
-        }
-        if (archivo == null) {
-            JOptionPane.showMessageDialog(null, "Debe crear o abrir un archivo");
+        try {
+            archivo.seek(0);
 
-        } else {
             if (!c.isEmpty()) {
-                if (check) {
-                    for (int i = 0; i < c.size(); i++) {
-                        escribir += c.get(i).getNombre() + "|" + c.get(i).getTipo() + "|" + c.get(i).getLongitud() + delim + c.get(i).isLlaveP();
-                        if (!(i == c.size() - 1)) {
-                            escribir += ";";
-                        }
-                    }
-                    try (BufferedWriter bw = new BufferedWriter(new FileWriter(archivo))) {
-                        bw.write(escribir);
-                        System.out.println("File written successfully.");
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                } else {
-                    JOptionPane.showMessageDialog(this, "Debe haber una llave primaria");
-                }
-            
-            
-            } else {
-                JOptionPane.showMessageDialog(null, "Debe crear Campos");
+                m.setLista(c);
             }
-
+            
+            archivo.writeBytes(m.toString());
+        } catch (IOException ex) {
+            Logger.getLogger(Proy.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        
+        
+
+//        String escribir = "";
+//        boolean check = false;
+//        for (int i = 0; i < c.size(); i++) {
+//            if (c.get(i).isLlaveP()) {
+//                check = true;
+//            }
+//        }
+//        if (archivo == null) {
+//            JOptionPane.showMessageDialog(null, "Debe crear o abrir un archivo");
+//
+//        } else {
+//            if (!c.isEmpty()) {
+//                if (check) {
+//                    for (int i = 0; i < c.size(); i++) {
+//                        escribir += c.get(i).getNombre() + "|" + c.get(i).getTipo() + "|" + c.get(i).getLongitud() + delim + c.get(i).isLlaveP();
+//                        if (!(i == c.size() - 1)) {
+//                            escribir += ";";
+//                        }
+//                    }
+//                    try (BufferedWriter bw = new BufferedWriter(new FileWriter(archivo))) {
+//                        bw.write(escribir);
+//                        System.out.println("File written successfully.");
+//                    } catch (IOException e) {
+//                        e.printStackTrace();
+//                    }
+//                } else {
+//                    JOptionPane.showMessageDialog(this, "Debe haber una llave primaria");
+//                }
+//            
+//            
+//            } else {
+//                JOptionPane.showMessageDialog(null, "Debe crear Campos");
+//            }
+//
+//        }
     }//GEN-LAST:event_jb_salvarArchivoActionPerformed
 
     private void jtf_nombreCampoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtf_nombreCampoActionPerformed
@@ -1041,7 +1099,8 @@ public class Proy extends javax.swing.JFrame {
     private javax.swing.JTextField jtf_nombreCampo;
     // End of variables declaration//GEN-END:variables
     ArrayList<Campos> c = new ArrayList();
-    File archivo;
+    RandomAccessFile archivo;
     BufferedWriter bw;
     String delim;
+    MetaData m = new MetaData();
 }
