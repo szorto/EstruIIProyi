@@ -36,6 +36,7 @@ public class Proy extends javax.swing.JFrame {
         Menu.setLayout(new CardLayout());
         MenuMenus.setLayout(new CardLayout());
         jtb_Campos.setLayout(new CardLayout());
+        jtp_registros.setLayout(new CardLayout());
     }
 
     /**
@@ -101,6 +102,16 @@ public class Proy extends javax.swing.JFrame {
         jl_eliminarCampo = new javax.swing.JList<>();
         jb_eliminarCampo = new javax.swing.JButton();
         jp_registros = new javax.swing.JPanel();
+        jtp_registros = new javax.swing.JTabbedPane();
+        jp_introducirregistros = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jt_introR = new javax.swing.JTable();
+        jLabel4 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -706,15 +717,113 @@ public class Proy extends javax.swing.JFrame {
 
         MenuMenus.addTab("campo", jp_campos);
 
+        jt_introR.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jt_introR.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane4.setViewportView(jt_introR);
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel4.setText("Crear Reigstros");
+
+        jButton2.setText("Introducir");
+
+        jButton3.setText("Crear");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setText("Introducir Registros");
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setText("Crear el Registro");
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setText("o");
+
+        javax.swing.GroupLayout jp_introducirregistrosLayout = new javax.swing.GroupLayout(jp_introducirregistros);
+        jp_introducirregistros.setLayout(jp_introducirregistrosLayout);
+        jp_introducirregistrosLayout.setHorizontalGroup(
+            jp_introducirregistrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jp_introducirregistrosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jp_introducirregistrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jp_introducirregistrosLayout.createSequentialGroup()
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jp_introducirregistrosLayout.createSequentialGroup()
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 423, Short.MAX_VALUE)
+                        .addGroup(jp_introducirregistrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jp_introducirregistrosLayout.createSequentialGroup()
+                                .addGap(109, 109, 109)
+                                .addGroup(jp_introducirregistrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(87, 87, 87))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jp_introducirregistrosLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(25, 25, 25))))))
+            .addGroup(jp_introducirregistrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jp_introducirregistrosLayout.createSequentialGroup()
+                    .addContainerGap(483, Short.MAX_VALUE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(21, 21, 21)))
+            .addGroup(jp_introducirregistrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jp_introducirregistrosLayout.createSequentialGroup()
+                    .addContainerGap(480, Short.MAX_VALUE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(24, 24, 24)))
+        );
+        jp_introducirregistrosLayout.setVerticalGroup(
+            jp_introducirregistrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jp_introducirregistrosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jp_introducirregistrosLayout.createSequentialGroup()
+                .addGap(121, 121, 121)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30))
+            .addGroup(jp_introducirregistrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jp_introducirregistrosLayout.createSequentialGroup()
+                    .addGap(80, 80, 80)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(288, Short.MAX_VALUE)))
+            .addGroup(jp_introducirregistrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jp_introducirregistrosLayout.createSequentialGroup()
+                    .addContainerGap(227, Short.MAX_VALUE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(141, 141, 141)))
+        );
+
+        jtp_registros.addTab("introducir", jp_introducirregistros);
+
         javax.swing.GroupLayout jp_registrosLayout = new javax.swing.GroupLayout(jp_registros);
         jp_registros.setLayout(jp_registrosLayout);
         jp_registrosLayout.setHorizontalGroup(
             jp_registrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 725, Short.MAX_VALUE)
+            .addComponent(jtp_registros)
         );
         jp_registrosLayout.setVerticalGroup(
             jp_registrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 448, Short.MAX_VALUE)
+            .addComponent(jtp_registros)
         );
 
         MenuMenus.addTab("registro", jp_registros);
@@ -781,6 +890,7 @@ public class Proy extends javax.swing.JFrame {
         if (archivo != null) {
             try {
                 archivo.close();
+                m = new MetaData();
             } catch (IOException ex) {
                 Logger.getLogger(Proy.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -809,8 +919,24 @@ public class Proy extends javax.swing.JFrame {
     }//GEN-LAST:event_jb_archivosActionPerformed
 
     private void jb_registrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_registrosActionPerformed
-        Menu.setSelectedIndex(2);
-        MenuMenus.setSelectedIndex(2);
+        if (m.getLista().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Debe tener Campos Salvados");
+        } else {
+            Object[] temp = new Object[m.getLista().size()];
+
+            DefaultTableModel mr = new DefaultTableModel();
+            Object[] tempi = new Object[m.getLista().size()];
+            mr.addRow(tempi);
+            for (int i = 0; i < m.getLista().size(); i++) {
+                mr.addColumn(m.getLista().get(i).getNombre());
+            }
+
+            jt_introR.setModel(mr);
+
+            Menu.setSelectedIndex(2);
+            MenuMenus.setSelectedIndex(2);
+            jtp_registros.setSelectedIndex(0);
+        }
     }//GEN-LAST:event_jb_registrosActionPerformed
 
     private void jb_estandarizacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_estandarizacionActionPerformed
@@ -992,21 +1118,21 @@ public class Proy extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Se ha abierto el archivo correctamente");
             try {
                 archivo = new RandomAccessFile(fc.getSelectedFile(), "rw");
-                
+
                 //Cargar metadata
                 //Carga los campos
                 String campos = archivo.readLine();
                 String Camp = "";
                 ArrayList atris = new ArrayList();
                 for (int i = 0; i < campos.length(); i++) {
-                    if(campos.charAt(i) == '|'){
+                    if (campos.charAt(i) == '|') {
                         atris.add(Camp);
                         Camp = "";
-                    }else if(campos.charAt(i) == ',' || i == campos.length() -1){
-                        m.getLista().add(new Campos((String)atris.get(0), (String)atris.get(1), Integer.parseInt((String)atris.get(2)), Boolean.parseBoolean(Camp)));
+                    } else if (campos.charAt(i) == ',' || i == campos.length() - 1) {
+                        m.getLista().add(new Campos((String) atris.get(0), (String) atris.get(1), Integer.parseInt((String) atris.get(2)), Boolean.parseBoolean(Camp)));
                         Camp = "";
                         atris = new ArrayList();
-                    }else{
+                    } else {
                         Camp += campos.charAt(i);
                     }
                 }
@@ -1023,26 +1149,26 @@ public class Proy extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Occurio un error al tratar de abrir el archivo");
         }
-        
-        
-        
+
+
     }//GEN-LAST:event_jb_abrirArchivoActionPerformed
 
     private void jb_salvarArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_salvarArchivoActionPerformed
-        try {
-            archivo.seek(0);
+        if (arbol.getRoot() == null) {
+            try {
+                archivo.setLength(0);
+                archivo.seek(0);
+                if (!c.isEmpty()) {
+                    m.setLista(c);
+                }
+                archivo.writeBytes(m.toString());
 
-            if (!c.isEmpty()) {
-                m.setLista(c);
+            } catch (IOException ex) {
+                Logger.getLogger(Proy.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
-            archivo.writeBytes(m.toString());
-        } catch (IOException ex) {
-            Logger.getLogger(Proy.class.getName()).log(Level.SEVERE, null, ex);
+        } else {
+            JOptionPane.showMessageDialog(this, "No puede salvar el registro porque ya tiene registros");
         }
-        
-        
-        
 
 //        String escribir = "";
 //        boolean check = false;
@@ -1117,6 +1243,63 @@ public class Proy extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jb_cerrarArchivo2ActionPerformed
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        boolean check = true;
+        DefaultTableModel mr = (DefaultTableModel) jt_introR.getModel();
+        int cont = m.toString().length() + (m.getCantidad() * m.getLongitud());
+        System.out.println("la variable cont es: " + m.getCantidad());
+        String regi = "";
+
+        for (int i = 0; i < m.getLista().size(); i++) {
+            if (i == m.getLista().size() - 1) {
+                if (mr.getValueAt(0, i) == null || mr.getValueAt(0, i).equals("")) {
+                    JOptionPane.showMessageDialog(this, "El campo de " + m.getLista().get(i).getNombre() + "esta vacio");
+                    check = false;
+
+                } else if (m.getLista().get(i).getLongitud() < ((String) mr.getValueAt(0, i)).length() || mr.getValueAt(0, i) == null) {
+                    JOptionPane.showMessageDialog(this, "La longitud de " + m.getLista().get(i).getNombre() + " excede");
+                    check = false;
+                } else {
+                    regi += mr.getValueAt(0, i) + "\n";
+                }
+            } else {
+                if (mr.getValueAt(0, i) == null || mr.getValueAt(0, i).equals("")) {
+                    JOptionPane.showMessageDialog(this, "El campo de " + m.getLista().get(i).getNombre() + "esta vacio");
+                    check = false;
+
+                } else if (m.getLista().get(i).getLongitud() < ((String) mr.getValueAt(0, i)).length() || mr.getValueAt(0, i) == null) {
+                    JOptionPane.showMessageDialog(this, "La longitud de " + m.getLista().get(i).getNombre() + " excede");
+                    check = false;
+                } else {
+                    regi += mr.getValueAt(0, i) + "|";
+                }
+
+            }
+        }
+        m.setCantidad(m.getCantidad() + 1);
+        mr.removeRow(0);
+        Object[] tempi = new Object[m.getLista().size()];
+        mr.addRow(tempi);
+        jt_introR.setModel(mr);
+        try {
+            if (check) {
+                if (regi.length() < m.getLongitud()) {
+                    for (int i = regi.length(); i <= m.getLongitud(); i++) {
+                        regi += "$";
+                    }
+                }
+
+                archivo.seek(cont);
+                archivo.writeBytes(regi);
+
+            }
+
+        } catch (IOException ex) {
+            Logger.getLogger(Proy.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_jButton3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1156,9 +1339,15 @@ public class Proy extends javax.swing.JFrame {
     private javax.swing.JTabbedPane Menu;
     private javax.swing.JTabbedPane MenuMenus;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -1169,6 +1358,7 @@ public class Proy extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JButton jb_EliminarCampos;
     private javax.swing.JButton jb_ListarCampos;
     private javax.swing.JButton jb_abrirArchivo;
@@ -1199,19 +1389,23 @@ public class Proy extends javax.swing.JFrame {
     private javax.swing.JPanel jp_campos;
     private javax.swing.JPanel jp_crearCampos;
     private javax.swing.JPanel jp_eliminarCampos;
+    private javax.swing.JPanel jp_introducirregistros;
     private javax.swing.JPanel jp_listarCampos;
     private javax.swing.JPanel jp_modificarCampos;
     private javax.swing.JPanel jp_registros;
     private javax.swing.JPanel jp_seleccion;
     private javax.swing.JSpinner js_longitud;
+    private javax.swing.JTable jt_introR;
     private javax.swing.JTable jt_listarCampos;
     private javax.swing.JTable jt_modificarCampos;
     private javax.swing.JTabbedPane jtb_Campos;
     private javax.swing.JTextField jtf_nombreCampo;
+    private javax.swing.JTabbedPane jtp_registros;
     // End of variables declaration//GEN-END:variables
     ArrayList<Campos> c = new ArrayList();
     RandomAccessFile archivo;
     BufferedWriter bw;
     String delim;
     MetaData m = new MetaData();
+    BTree arbol = new BTree();
 }

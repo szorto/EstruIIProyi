@@ -20,7 +20,31 @@ public class BTree {
         this.root = null;
         this.t = t;
     }
+    
+    public BTree() {
 
+    }
+
+    public BTREENODE getRoot() {
+        return root;
+    }
+
+    public void setRoot(BTREENODE root) {
+        this.root = root;
+    }
+
+    public int getT() {
+        return t;
+    }
+
+    public void setT(int t) {
+        this.t = t;
+    }
+    
+    
+    
+    
+    
     BTREENODE search(BTREENODE x, int k) {
         int i = 0;
         while((i <= x.getN()) && k > x.getKeys()[i]){

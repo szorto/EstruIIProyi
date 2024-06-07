@@ -16,6 +16,8 @@ public class MetaData {
     int longitud, cantidad, cabezaA;
 
     public MetaData() {
+        this.cabezaA = -1;
+            this.cantidad = 0;
     }
 
     public ArrayList<Campos> getLista() {
@@ -67,14 +69,17 @@ public class MetaData {
             }
             longi += lista.size() - 1;
             this.longitud = longi;
-            this.cabezaA = -1;
-            this.cantidad = 0;
-            pipi += "\n" + this.longitud + "\n" + this.cantidad + "\n" + this.cabezaA;
+            
+            pipi += "\n" + this.longitud + "\n" + this.cantidad + "\n" + this.cabezaA + "\n";
         return pipi;
     }
     
     public String toString2(){
         return longitud + " qa " + cantidad + " sd " + cabezaA;
+    }
+    
+    void sumarCntidad(){
+        this.cantidad++;
     }
 
 }
