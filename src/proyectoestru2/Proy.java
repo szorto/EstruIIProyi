@@ -1291,6 +1291,8 @@ public class Proy extends javax.swing.JFrame {
 
                 archivo.seek(cont);
                 archivo.writeBytes(regi);
+                
+                
 
             }
 
