@@ -1276,10 +1276,25 @@ public class Proy extends javax.swing.JFrame {
 
             }
         }
+         //insertar al arbol
+         if(arbol.getRoot() == null){
+             arbol.createBTree();
+         }
+         for (int i = 0; i < m.getLista().size(); i++) {
+            if(m.getLista().get(i).isLlaveP()){
+                arbol.insert(arbol.getRoot(), Integer.parseInt((String) mr.getValueAt(0, i)));
+        arbol.print(arbol.getRoot());
+            }
+        }
         m.setCantidad(m.getCantidad() + 1);
         mr.removeRow(0);
         Object[] tempi = new Object[m.getLista().size()];
+        
+        
+        
         mr.addRow(tempi);
+       
+        
         jt_introR.setModel(mr);
         try {
             if (check) {
@@ -1299,6 +1314,8 @@ public class Proy extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(Proy.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        
 
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -1409,5 +1426,5 @@ public class Proy extends javax.swing.JFrame {
     BufferedWriter bw;
     String delim;
     MetaData m = new MetaData();
-    BTree arbol = new BTree();
+    BTree arbol = new BTree(6);
 }
