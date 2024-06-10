@@ -1118,6 +1118,7 @@ public class Proy extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Se ha abierto el archivo correctamente");
             try {
                 archivo = new RandomAccessFile(fc.getSelectedFile(), "rw");
+                holder = fc.getSelectedFile();
 
                 //Cargar metadata
                 //Carga los campos
@@ -1279,6 +1280,7 @@ public class Proy extends javax.swing.JFrame {
          //insertar al arbol
          if(arbol.getRoot() == null){
              arbol.createBTree();
+             btreeFile = new File("./" + holder.getName());
          }
          for (int i = 0; i < m.getLista().size(); i++) {
             if(m.getLista().get(i).isLlaveP()){
@@ -1427,4 +1429,5 @@ public class Proy extends javax.swing.JFrame {
     String delim;
     MetaData m = new MetaData();
     BTree arbol = new BTree(6);
+    File btreeFile, holder;
 }

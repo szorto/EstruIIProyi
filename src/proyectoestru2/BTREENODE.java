@@ -4,6 +4,7 @@
  */
 package proyectoestru2;
 
+import java.io.Serializable;
 import static java.lang.Math.floor;
 
 /**

@@ -4,14 +4,16 @@
  */
 package proyectoestru2;
 
+import java.io.Serializable;
 import static java.lang.Math.floor;
 
 /**
  *
  * @author SURFACEB2I7
  */
-public class BTree {
+public class BTree implements Serializable {
 
+    private static final long serialVersionUID = 1L;
     BTREENODE root;
     int t;
 
@@ -121,9 +123,9 @@ public class BTree {
                 i--;
             }
             i++;
-            if(x.getC()[i].getN() == this.t){
+            if (x.getC()[i].getN() == this.t) {
                 split(x, k, x.getC()[i]);
-                if(k > x.getKeys()[i]){
+                if (k > x.getKeys()[i]) {
                     i++;
                 }
             }
@@ -134,7 +136,7 @@ public class BTree {
     void insert(BTREENODE r, int k) {
         r = this.root;
         if (r.getN() == this.t - 1) {
-            int i =r.getN() - 1;
+            int i = r.getN() - 1;
             while (i >= 0 && k < r.getKeys()[i]) {
                 r.getKeys()[i + 1] = r.getKeys()[i];
                 i--;
@@ -156,7 +158,9 @@ public class BTree {
     void print(BTREENODE x) {
         if (!x.isLeaf()) {
             for (int i = 0; i < x.getC().length; i++) {
-                if(!(x.getC()[i] == null)){print(x.getC()[i]);}
+                if (!(x.getC()[i] == null)) {
+                    print(x.getC()[i]);
+                }
             }
         }
         System.out.println("");
