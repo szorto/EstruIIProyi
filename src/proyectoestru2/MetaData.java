@@ -16,8 +16,8 @@ public class MetaData {
     int longitud, cantidad, cabezaA;
 
     public MetaData() {
-        this.cabezaA = -1;
-            this.cantidad = 0;
+        this.cabezaA = 0;
+        this.cantidad = 0;
     }
 
     public ArrayList<Campos> getLista() {
@@ -56,29 +56,51 @@ public class MetaData {
     public String toString() {
         String pipi = "";
         for (int i = 0; i < lista.size(); i++) {
-                if (i == lista.size() - 1) {
-                    pipi += lista.get(i).getNombre() + "|" + lista.get(i).getTipo() + "|" + lista.get(i).getLongitud() + "|" + lista.get(i).isLlaveP();
-                } else {
-                    pipi += lista.get(i).getNombre() + "|" + lista.get(i).getTipo() + "|" + lista.get(i).getLongitud() + "|" + lista.get(i).isLlaveP() + ",";
-                }
+            if (i == lista.size() - 1) {
+                pipi += lista.get(i).getNombre() + "|" + lista.get(i).getTipo() + "|" + lista.get(i).getLongitud() + "|" + lista.get(i).isLlaveP();
+            } else {
+                pipi += lista.get(i).getNombre() + "|" + lista.get(i).getTipo() + "|" + lista.get(i).getLongitud() + "|" + lista.get(i).isLlaveP() + ",";
             }
-            int longi = 0;
-            for (Campos cc : lista) {
+        }
+        int longi = 0;
+        for (Campos cc : lista) {
+            if (cc.getLongitud() != -1) {
                 longi += cc.getLongitud();
                 System.out.println(cc.getLongitud());
+            }else{
+                longi += 1;
             }
-            longi += lista.size() - 1;
-            this.longitud = longi;
-            
-            pipi += "\n" + this.longitud + "\n" + this.cantidad + "\n" + this.cabezaA + "\n";
+        }
+        longi += lista.size() - 1;
+        this.longitud = longi;
+        
+        String cab = "" ;
+        if(this.cabezaA == -1){
+            cab += "-1";
+        }else{
+            cab = "" + this.cabezaA;
+        }
+        String can = "" + this.cantidad;
+        String lon = "" + this.longitud;
+        for (int i = lon.length(); i < 4; i++) {
+            lon += "$";
+        }
+        for (int i = can.length(); i < 6; i++) {
+            can += "$";
+        }
+        for (int i = cab.length(); i < 6; i++) {
+            cab += "$";
+        }
+        
+        pipi += "\n" + lon + "\n" + can + "\n" + cab + "\n";
         return pipi;
     }
-    
-    public String toString2(){
+
+    public String toString2() {
         return longitud + " qa " + cantidad + " sd " + cabezaA;
     }
-    
-    void sumarCntidad(){
+
+    void sumarCntidad() {
         this.cantidad++;
     }
 

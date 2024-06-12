@@ -8,9 +8,11 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -940,8 +942,8 @@ public class Proy extends javax.swing.JFrame {
     }//GEN-LAST:event_jb_registrosActionPerformed
 
     private void jb_estandarizacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_estandarizacionActionPerformed
-        Menu.setSelectedIndex(4);
-        MenuMenus.setSelectedIndex(4);
+//        Menu.setSelectedIndex(4);
+//        MenuMenus.setSelectedIndex(4);
     }//GEN-LAST:event_jb_estandarizacionActionPerformed
 
     private void jb_crearCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_crearCamposActionPerformed
@@ -1047,7 +1049,8 @@ public class Proy extends javax.swing.JFrame {
         for (int i = 0; i < c.size(); i++) {
             if (tm.getValueAt(i, 1).equals("Boolean")) {
                 if ((int) tm.getValueAt(i, 2) != -1 || tm.getValueAt(i, 3).equals(true)) {
-                    check = false;
+                    tm.setValueAt(-1, i, 2);
+                    tm.setValueAt(false, i, 3);
                 }
             } else {
                 if (tm.getValueAt(i, 3).equals(true)) {
@@ -1055,16 +1058,19 @@ public class Proy extends javax.swing.JFrame {
                 }
                 if (tm.getValueAt(i, 1).equals("String") || tm.getValueAt(i, 1).equals("Integer") || tm.getValueAt(i, 1).equals("Double")
                         || tm.getValueAt(i, 1).equals("Float") || tm.getValueAt(i, 1).equals("Byte") || tm.getValueAt(i, 1).equals("Char")
-                        || tm.getValueAt(i, 1).equals("float")) {
+                        || tm.getValueAt(i, 1).equals("Byte") || tm.getValueAt(i, 1).equals("Short")) {
                 } else {
+                    JOptionPane.showMessageDialog(this, "El tipo de dato ingresado no es valido");
                     check = false;
                 }
                 if ((int) tm.getValueAt(i, 2) < 1) {
+                    JOptionPane.showMessageDialog(this, "Campos deben tener minimo 1 de longitud (excepto boolean)");
                     check = false;
                 }
             }
         }
-        if (contLP > 1) {
+        if (contLP != 1) {
+            JOptionPane.showMessageDialog(this, "Solo puede tener una llave primaria");
             check = false;
         }
 
@@ -1093,8 +1099,18 @@ public class Proy extends javax.swing.JFrame {
     private void jb_nuevoArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_nuevoArchivoActionPerformed
         String nombre = JOptionPane.showInputDialog(null, "Ingrese el nombre del archivo");
         try {
-            archivo = new RandomAccessFile("./" + nombre + ".txt", "rw");
+            archivo = new RandomAccessFile("./" + nombre + ".txt", "rws");
+            btreeFile = new File("./" + nombre + "BT.txt");
+            btreeFile.createNewFile();
+            bta = new BTreeAdmin(btreeFile);
+            arbol = new BTree(6);
+            arbol.createBTree();
+            bta.setTree(arbol);
+            bta.escribirArbol();
+
         } catch (FileNotFoundException ex) {
+            Logger.getLogger(Proy.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
             Logger.getLogger(Proy.class.getName()).log(Level.SEVERE, null, ex);
         }
         File prueba = new File("./" + nombre + ".txt");
@@ -1102,6 +1118,7 @@ public class Proy extends javax.swing.JFrame {
         try {
             if (prueba.createNewFile()) {
                 JOptionPane.showMessageDialog(null, "Se ha creado el archivo correctamente");
+                holder = prueba;
             }
         } catch (IOException ex) {
             Logger.getLogger(Proy.class.getName()).log(Level.SEVERE, null, ex);
@@ -1116,12 +1133,26 @@ public class Proy extends javax.swing.JFrame {
         int returnValue = fc.showOpenDialog(null);
         if (returnValue == JFileChooser.APPROVE_OPTION) {
             JOptionPane.showMessageDialog(null, "Se ha abierto el archivo correctamente");
+
             try {
-                archivo = new RandomAccessFile(fc.getSelectedFile(), "rw");
+                archivo = new RandomAccessFile(fc.getSelectedFile(), "rws");
                 holder = fc.getSelectedFile();
+
+                String nomi = fc.getSelectedFile().getName().substring(0, fc.getSelectedFile().getName().length() - 4);
+                System.out.println(nomi);
+                btreeFile = new File("./" + nomi + "BT.txt");
+                bta = new BTreeAdmin(btreeFile);
+                bta.cargarArbol();
+                arbol = bta.getTree();
+                if(arbol == null){
+                    arbol = new BTree(6);
+                    arbol.createBTree();
+                }
+                arbol.print();
 
                 //Cargar metadata
                 //Carga los campos
+                m = new MetaData();
                 String campos = archivo.readLine();
                 String Camp = "";
                 ArrayList atris = new ArrayList();
@@ -1131,6 +1162,7 @@ public class Proy extends javax.swing.JFrame {
                         Camp = "";
                     } else if (campos.charAt(i) == ',' || i == campos.length() - 1) {
                         m.getLista().add(new Campos((String) atris.get(0), (String) atris.get(1), Integer.parseInt((String) atris.get(2)), Boolean.parseBoolean(Camp)));
+                        c.add(new Campos((String) atris.get(0), (String) atris.get(1), Integer.parseInt((String) atris.get(2)), Boolean.parseBoolean(Camp)));
                         Camp = "";
                         atris = new ArrayList();
                     } else {
@@ -1138,9 +1170,9 @@ public class Proy extends javax.swing.JFrame {
                     }
                 }
                 //Carga el resto de los atributos
-                m.setLongitud(Integer.parseInt(archivo.readLine()));
-                m.setCantidad(Integer.parseInt(archivo.readLine()));
-                m.setCabezaA(Integer.parseInt(archivo.readLine()));
+                m.setLongitud(Integer.parseInt(archivo.readLine().replaceAll("[^0-9]", "")));
+                m.setCantidad(Integer.parseInt(archivo.readLine().replaceAll("[^0-9]", "")));
+                m.setCabezaA(Integer.parseInt(archivo.readLine().replaceAll("[^0-9]", "")));
                 System.out.println(m.toString2());
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(Proy.class.getName()).log(Level.SEVERE, null, ex);
@@ -1155,7 +1187,13 @@ public class Proy extends javax.swing.JFrame {
     }//GEN-LAST:event_jb_abrirArchivoActionPerformed
 
     private void jb_salvarArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_salvarArchivoActionPerformed
-        if (arbol.getRoot() == null) {
+        if (archivo == null) {
+            JOptionPane.showMessageDialog(this, "No tiene un archivo abierto");
+        } else if (c.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No hay campos");
+        } else if (arbol.getRoot() != null) {
+            JOptionPane.showMessageDialog(this, "No puede salvar el registro porque ya tiene registros");
+        } else {
             try {
                 archivo.setLength(0);
                 archivo.seek(0);
@@ -1163,12 +1201,10 @@ public class Proy extends javax.swing.JFrame {
                     m.setLista(c);
                 }
                 archivo.writeBytes(m.toString());
-
+                JOptionPane.showMessageDialog(this, "Los campos fueron salvados");
             } catch (IOException ex) {
                 Logger.getLogger(Proy.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } else {
-            JOptionPane.showMessageDialog(this, "No puede salvar el registro porque ya tiene registros");
         }
 
 //        String escribir = "";
@@ -1247,8 +1283,6 @@ public class Proy extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         boolean check = true;
         DefaultTableModel mr = (DefaultTableModel) jt_introR.getModel();
-        int cont = m.toString().length() + (m.getCantidad() * m.getLongitud());
-        System.out.println("la variable cont es: " + m.getCantidad());
         String regi = "";
 
         for (int i = 0; i < m.getLista().size(); i++) {
@@ -1277,47 +1311,61 @@ public class Proy extends javax.swing.JFrame {
 
             }
         }
-         //insertar al arbol
-         if(arbol.getRoot() == null){
-             arbol.createBTree();
-             btreeFile = new File("./" + holder.getName());
-         }
-         for (int i = 0; i < m.getLista().size(); i++) {
-            if(m.getLista().get(i).isLlaveP()){
+        //insertar al arbol
+        if (arbol.getRoot() == null) {
+            arbol.createBTree();
+        }
+        for (int i = 0; i < m.getLista().size(); i++) {
+            if (m.getLista().get(i).isLlaveP()) {
                 arbol.insert(arbol.getRoot(), Integer.parseInt((String) mr.getValueAt(0, i)));
-        arbol.print(arbol.getRoot());
+                arbol.print(arbol.getRoot());
             }
         }
-        m.setCantidad(m.getCantidad() + 1);
+        bta.setTree(arbol);
+        bta.escribirArbol();
+
         mr.removeRow(0);
         Object[] tempi = new Object[m.getLista().size()];
-        
-        
-        
         mr.addRow(tempi);
-       
-        
         jt_introR.setModel(mr);
+        //insertar registro al archivo
         try {
             if (check) {
                 if (regi.length() < m.getLongitud()) {
+                    regi = regi.substring(0, regi.length() - 1);
                     for (int i = regi.length(); i <= m.getLongitud(); i++) {
                         regi += "$";
                     }
                 }
+                int cont;
+                if (m.getCantidad() == 0) {
+                    cont = m.toString().length() + (m.getCantidad() * m.getLongitud());
+                } else {
+                    cont = m.toString().length() + (m.getCantidad() * m.getLongitud()) + 1;
+                }
+                m.setCantidad(m.getCantidad() + 1); //actualizar cantidad
 
                 archivo.seek(cont);
-                archivo.writeBytes(regi);
-                
-                
-
+                archivo.readLine();
+                archivo.writeBytes(regi + "\r\n");
+                System.out.println(regi);
             }
+        } catch (IOException ex) {
+            Logger.getLogger(Proy.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        //actualizar metadata
+        try {
+//          archivo.setLength(0);
+            archivo.seek(0);
+            if (!c.isEmpty()) {
+                m.setLista(c);
+            }
+            archivo.writeBytes(m.toString());
 
         } catch (IOException ex) {
             Logger.getLogger(Proy.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
 
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -1430,4 +1478,5 @@ public class Proy extends javax.swing.JFrame {
     MetaData m = new MetaData();
     BTree arbol = new BTree(6);
     File btreeFile, holder;
+    BTreeAdmin bta;
 }

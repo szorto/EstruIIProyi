@@ -13,6 +13,7 @@ import static java.lang.Math.floor;
  */
 public class BTREENODE extends BTree{
     int[] keys;
+    String[] keysS;
     BTREENODE[] C;
     int n;
     boolean leaf;

@@ -156,18 +156,36 @@ public class BTree implements Serializable {
     }
 
     void print(BTREENODE x) {
-        if (!x.isLeaf()) {
-            for (int i = 0; i < x.getC().length; i++) {
-                if (!(x.getC()[i] == null)) {
-                    print(x.getC()[i]);
+        if (this.root != null) {
+            if (!x.isLeaf()) {
+                for (int i = 0; i < x.getC().length; i++) {
+                    if (!(x.getC()[i] == null)) {
+                        print(x.getC()[i]);
+                    }
                 }
             }
-        }
-        System.out.println("");
-        for (int i = 0; i < x.getN(); i++) {
-            System.out.println(x.getKeys()[i] + " ");
+            System.out.println("");
+            for (int i = 0; i < x.getN(); i++) {
+                System.out.println(x.getKeys()[i] + " ");
+            }
         }
 
+    }
+
+    void print() {
+        if (this.root != null) {
+            if (!this.root.isLeaf()) {
+                for (int i = 0; i < this.root.getC().length; i++) {
+                    if (!(this.root.getC()[i] == null)) {
+                        print(this.root.getC()[i]);
+                    }
+                }
+            }
+            System.out.println("");
+            for (int i = 0; i < this.root.getN(); i++) {
+                System.out.println(this.root.getKeys()[i] + " ");
+            }
+        }
     }
 
 }
