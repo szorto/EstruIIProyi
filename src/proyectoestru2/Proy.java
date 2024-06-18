@@ -1104,7 +1104,7 @@ public class Proy extends javax.swing.JFrame {
             btreeFile.createNewFile();
             bta = new BTreeAdmin(btreeFile);
             arbol = new BTree(6);
-            arbol.createBTree();
+
             bta.setTree(arbol);
             bta.escribirArbol();
 
@@ -1146,9 +1146,8 @@ public class Proy extends javax.swing.JFrame {
                 arbol = bta.getTree();
                 if(arbol == null){
                     arbol = new BTree(6);
-                    arbol.createBTree();
                 }
-                arbol.print();
+                arbol.printTree();
 
                 //Cargar metadata
                 //Carga los campos
@@ -1313,12 +1312,13 @@ public class Proy extends javax.swing.JFrame {
         }
         //insertar al arbol
         if (arbol.getRoot() == null) {
-            arbol.createBTree();
+            BTreeNode nuevo = new BTreeNode(arbol.getT(), check);
+            arbol.getRoot().children.add(nuevo);
         }
         for (int i = 0; i < m.getLista().size(); i++) {
             if (m.getLista().get(i).isLlaveP()) {
-                arbol.insert(arbol.getRoot(), Integer.parseInt((String) mr.getValueAt(0, i)));
-                arbol.print(arbol.getRoot());
+                 arbol.insert(Integer.parseInt((String) mr.getValueAt(0, i)));
+                arbol.printTree();
             }
         }
         bta.setTree(arbol);

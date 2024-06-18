@@ -6,6 +6,7 @@ package proyectoestru2;
 
 import java.io.Serializable;
 import static java.lang.Math.floor;
+import java.util.Collections;
 
 /**
  *
@@ -14,24 +15,213 @@ import static java.lang.Math.floor;
 public class BTree implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    BTREENODE root;
-    int t;
+    BTreeNode root;
+    int t;  // Minimum degree
 
     public BTree(int t) {
-
-        this.root = null;
+        this.root = new BTreeNode(t, true);
         this.t = t;
     }
 
-    public BTree() {
-
+    public void insert(int k) {
+        BTreeNode r = root;
+        if (r.keys.size() == 2 * t - 1) {
+            BTreeNode s = new BTreeNode(t, false);
+            s.children.add(r);
+            splitChild(s, 0);
+            root = s;
+            insertNonFull(s, k);
+        } else {
+            insertNonFull(r, k);
+        }
     }
 
-    public BTREENODE getRoot() {
+    private void insertNonFull(BTreeNode x, int k) {
+        int i = x.keys.size() - 1;
+        if (x.leaf) {
+            x.keys.add(k);
+            Collections.sort(x.keys);
+        } else {
+            while (i >= 0 && k < x.keys.get(i)) {
+                i--;
+            }
+            i++;
+            if (x.children.get(i).keys.size() == 2 * t - 1) {
+                splitChild(x, i);
+                if (k > x.keys.get(i)) {
+                    i++;
+                }
+            }
+            insertNonFull(x.children.get(i), k);
+        }
+    }
+
+    private void splitChild(BTreeNode x, int i) {
+        int t = this.t;
+        BTreeNode y = x.children.get(i);
+        BTreeNode z = new BTreeNode(t, y.leaf);
+        x.children.add(i + 1, z);
+        x.keys.add(i, y.keys.get(t - 1));
+        z.keys.addAll(y.keys.subList(t, 2 * t - 1));
+        y.keys.subList(t - 1, y.keys.size()).clear();
+        if (!y.leaf) {
+            z.children.addAll(y.children.subList(t, y.children.size()));
+            y.children.subList(t, y.children.size()).clear();
+        }
+    }
+
+    public void delete(int k) {
+        delete(root, k);
+        if (root.keys.size() == 0) {
+            if (root.leaf) {
+                root = null;
+            } else {
+                root = root.children.get(0);
+            }
+        }
+    }
+
+    private void delete(BTreeNode node, int k) {
+        int idx = findKey(node, k);
+
+        if (idx < node.keys.size() && node.keys.get(idx) == k) {
+            if (node.leaf) {
+                node.keys.remove(idx);
+            } else {
+                deleteFromNonLeaf(node, idx);
+            }
+        } else {
+            if (node.leaf) {
+                return;  // Key not found
+            }
+            boolean flag = (idx == node.keys.size());
+            if (node.children.get(idx).keys.size() < t) {
+                fill(node, idx);
+            }
+            if (flag && idx > node.keys.size()) {
+                delete(node.children.get(idx - 1), k);
+            } else {
+                delete(node.children.get(idx), k);
+            }
+        }
+    }
+
+    private int findKey(BTreeNode node, int k) {
+        int idx = 0;
+        while (idx < node.keys.size() && node.keys.get(idx) < k) {
+            idx++;
+        }
+        return idx;
+    }
+
+    private void deleteFromNonLeaf(BTreeNode node, int idx) {
+        int k = node.keys.get(idx);
+        if (node.children.get(idx).keys.size() >= t) {
+            int pred = getPredecessor(node, idx);
+            node.keys.set(idx, pred);
+            delete(node.children.get(idx), pred);
+        } else if (node.children.get(idx + 1).keys.size() >= t) {
+            int succ = getSuccessor(node, idx);
+            node.keys.set(idx, succ);
+            delete(node.children.get(idx + 1), succ);
+        } else {
+            merge(node, idx);
+            delete(node.children.get(idx), k);
+        }
+    }
+
+    private int getPredecessor(BTreeNode node, int idx) {
+        BTreeNode cur = node.children.get(idx);
+        while (!cur.leaf) {
+            cur = cur.children.get(cur.keys.size());
+        }
+        return cur.keys.get(cur.keys.size() - 1);
+    }
+
+    private int getSuccessor(BTreeNode node, int idx) {
+        BTreeNode cur = node.children.get(idx + 1);
+        while (!cur.leaf) {
+            cur = cur.children.get(0);
+        }
+        return cur.keys.get(0);
+    }
+
+    private void fill(BTreeNode node, int idx) {
+        if (idx != 0 && node.children.get(idx - 1).keys.size() >= t) {
+            borrowFromPrev(node, idx);
+        } else if (idx != node.keys.size() && node.children.get(idx + 1).keys.size() >= t) {
+            borrowFromNext(node, idx);
+        } else {
+            if (idx != node.keys.size()) {
+                merge(node, idx);
+            } else {
+                merge(node, idx - 1);
+            }
+        }
+    }
+
+    private void borrowFromPrev(BTreeNode node, int idx) {
+        BTreeNode child = node.children.get(idx);
+        BTreeNode sibling = node.children.get(idx - 1);
+
+        child.keys.add(0, node.keys.get(idx - 1));
+        if (!child.leaf) {
+            child.children.add(0, sibling.children.remove(sibling.children.size() - 1));
+        }
+
+        node.keys.set(idx - 1, sibling.keys.remove(sibling.keys.size() - 1));
+    }
+
+    private void borrowFromNext(BTreeNode node, int idx) {
+        BTreeNode child = node.children.get(idx);
+        BTreeNode sibling = node.children.get(idx + 1);
+
+        child.keys.add(node.keys.get(idx));
+        node.keys.set(idx, sibling.keys.remove(0));
+
+        if (!child.leaf) {
+            child.children.add(sibling.children.remove(0));
+        }
+    }
+
+    private void merge(BTreeNode node, int idx) {
+        BTreeNode child = node.children.get(idx);
+        BTreeNode sibling = node.children.get(idx + 1);
+
+        child.keys.add(node.keys.remove(idx));
+        child.keys.addAll(sibling.keys);
+
+        if (!child.leaf) {
+            child.children.addAll(sibling.children);
+        }
+
+        node.children.remove(idx + 1);
+    }
+
+    public void printTree() {
+        printTree(root, 0);
+    }
+
+    private void printTree(BTreeNode node, int level) {
+        if (node != null) {
+            System.out.print("Level " + level + " ");
+            System.out.print(node.keys.size() + ": ");
+            for (int key : node.keys) {
+                System.out.print(key + " ");
+            }
+            System.out.println();
+            level++;
+            for (BTreeNode child : node.children) {
+                printTree(child, level);
+            }
+        }
+    }
+
+    public BTreeNode getRoot() {
         return root;
     }
 
-    public void setRoot(BTREENODE root) {
+    public void setRoot(BTreeNode root) {
         this.root = root;
     }
 
@@ -42,150 +232,6 @@ public class BTree implements Serializable {
     public void setT(int t) {
         this.t = t;
     }
-
-    BTREENODE search(BTREENODE x, int k) {
-        int i = 0;
-        while ((i <= x.getN()) && k > x.getKeys()[i]) {
-            i++;
-        }
-        if (i <= x.getN() && k == x.getKeys()[i]) {
-            return x;
-        }
-        if (x.isLeaf()) {
-            return null;
-        } else {
-            return search(x.getC()[i], k);
-        }
-
-    }
-
-    void createBTree() {
-        BTREENODE x = new BTREENODE();
-        x.setLeaf(true);
-        x.setN(0);
-        this.root = x;
-    }
-
-    void split(BTREENODE padre, int k, BTREENODE iz) {
-        int min = (int) floor((t - 1) / 2);
-        BTREENODE de = new BTREENODE();
-        de.setLeaf(true);
-        int indice = 0;
-        for (int i = 0; i < padre.getC().length; i++) {
-            if (!(padre.getC()[i] == null)) {
-                if (padre.getC()[i].equals(iz)) {
-                    indice = i;
-                }
-            }
-        }
-
-        if (t % 2 == 0) {
-            de.setN(min + 1);
-            int centro = iz.getKeys()[min];
-            for (int j = 0; j <= min; j++) {
-                de.getKeys()[j] = iz.getKeys()[j + min + 1];
-                iz.getKeys()[j + min] = 0;
-            }
-            if (!iz.isLeaf()) {
-                for (int i = 0; i < min + 1; i++) {
-                    de.getC()[i] = iz.getC()[i + min + 1];
-                    iz.getC()[i + min + 1] = null;
-                }
-            }
-            //iz.getKeys()[5] = 0;
-            iz.setN(min);
-            for (int i = padre.getN() - 1; i > indice; i--) {
-                padre.getC()[i + 1] = padre.getC()[i];
-            }
-            padre.getC()[indice + 1] = de;
-            for (int i = padre.getN() - 1; i > indice - 1; i--) {
-                padre.getKeys()[i + 1] = padre.getKeys()[i];
-            }
-            padre.getKeys()[indice] = centro;
-            padre.setN(padre.getN() + 1);
-        } else {
-
-        }
-
-    }
-
-    void insertNF(BTREENODE x, int k) {
-        int i = x.getN() - 1;
-        if (x.isLeaf() && x.getN() <= t - 1) {
-            while (i >= 0 && k < x.getKeys()[i]) {
-                x.getKeys()[i + 1] = x.getKeys()[i];
-                i--;
-            }
-            x.setN(x.getN() + 1);
-            x.getKeys()[i + 1] = k;
-        } else {
-            while (i >= 0 && k < x.getKeys()[i]) {
-                i--;
-            }
-            i++;
-            if (x.getC()[i].getN() == this.t) {
-                split(x, k, x.getC()[i]);
-                if (k > x.getKeys()[i]) {
-                    i++;
-                }
-            }
-            insertNF(x.getC()[i], k);
-        }
-    }
-
-    void insert(BTREENODE r, int k) {
-        r = this.root;
-        if (r.getN() == this.t - 1) {
-            int i = r.getN() - 1;
-            while (i >= 0 && k < r.getKeys()[i]) {
-                r.getKeys()[i + 1] = r.getKeys()[i];
-                i--;
-            }
-            r.setN(r.getN() + 1);
-            r.getKeys()[i + 1] = k;
-            BTREENODE s = new BTREENODE();
-            this.root = s;
-            s.setLeaf(false);
-            s.setN(0);
-            s.getC()[0] = r;
-            split(s, k, r);
-            //insertNF(s, k);     El split directamente añade el valor, espero que no nos joda despues lol
-        } else {
-            insertNF(r, k);
-        }
-    }
-
-    void print(BTREENODE x) {
-        if (this.root != null) {
-            if (!x.isLeaf()) {
-                for (int i = 0; i < x.getC().length; i++) {
-                    if (!(x.getC()[i] == null)) {
-                        print(x.getC()[i]);
-                    }
-                }
-            }
-            System.out.println("");
-            for (int i = 0; i < x.getN(); i++) {
-                System.out.println(x.getKeys()[i] + " ");
-            }
-        }
-
-    }
-
-    void print() {
-        if (this.root != null) {
-            if (!this.root.isLeaf()) {
-                for (int i = 0; i < this.root.getC().length; i++) {
-                    if (!(this.root.getC()[i] == null)) {
-                        print(this.root.getC()[i]);
-                    }
-                }
-            }
-            System.out.println("");
-            for (int i = 0; i < this.root.getN(); i++) {
-                System.out.println(this.root.getKeys()[i] + " ");
-            }
-        }
-    }
-
+    
+        
 }
