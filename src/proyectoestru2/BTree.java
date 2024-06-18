@@ -14,7 +14,7 @@ import java.util.Collections;
  */
 public class BTree implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 42L;
     BTreeNode root;
     int t;  // Minimum degree
 
@@ -25,7 +25,7 @@ public class BTree implements Serializable {
 
     public void insert(int k) {
         BTreeNode r = root;
-        if (r.keys.size() == 2 * t - 1) {
+        if (r.keys.size() == (2 * t) - 1) {
             BTreeNode s = new BTreeNode(t, false);
             s.children.add(r);
             splitChild(s, 0);
@@ -214,6 +214,29 @@ public class BTree implements Serializable {
             for (BTreeNode child : node.children) {
                 printTree(child, level);
             }
+        }
+    }
+    
+    public BTreeNode search(int k) {
+        if (root == null) {
+            return null;
+        } else {
+            return search(root, k);
+        }
+    }
+
+    private BTreeNode search(BTreeNode x, int k) {
+        int i = 0;
+        while (i < x.keys.size() && k > x.keys.get(i)) {
+            i++;
+        }
+        if (i < x.keys.size() && k == x.keys.get(i)) {
+            return x;
+        }
+        if (x.leaf) {
+            return null;
+        } else {
+            return search(x.children.get(i), k);
         }
     }
 

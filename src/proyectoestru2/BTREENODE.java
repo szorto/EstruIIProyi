@@ -81,11 +81,13 @@ import java.util.List;
 //        this.leaf = leaf;
 //    }
     
-    public class BTreeNode {
+    public class BTreeNode implements Serializable{
+        private static final long serialVersionUID = 412L;
     int t;
     boolean leaf;
     List<Integer> keys;
     List<BTreeNode> children;
+    int offset;
 
     public BTreeNode(int t,boolean leaf) {
         this.t = t;
