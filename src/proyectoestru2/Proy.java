@@ -22,6 +22,9 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 
 /**
  *
@@ -842,6 +845,11 @@ public class Proy extends javax.swing.JFrame {
         jLabel4.setText("Crear Reigstros");
 
         jButton2.setText("Introducir");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Crear");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -1717,9 +1725,14 @@ public class Proy extends javax.swing.JFrame {
     }//GEN-LAST:event_jb_nuevoArchivo2ActionPerformed
 
     private void jb_abrirArchivo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_abrirArchivo2ActionPerformed
-
+        if(archivo== null){
+            JOptionPane.showMessageDialog(null, "No hay un archivo abierto para poder hacerlo XML");
+        }else{
+           // JAXBContext content = JAXBContext.newInstance(classesToBeBound);
+        }
     }//GEN-LAST:event_jb_abrirArchivo2ActionPerformed
 
+    
     private void jb_salvarArchivo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_salvarArchivo2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jb_salvarArchivo2ActionPerformed
@@ -1810,6 +1823,10 @@ public class Proy extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jb_nuevoArchivo4ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
