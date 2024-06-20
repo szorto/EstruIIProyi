@@ -23,23 +23,24 @@ public class BTree implements Serializable {
         this.t = t;
     }
 
-    public void insert(int k) {
+    public void insert(int k, int offset) {
         BTreeNode r = root;
         if (r.keys.size() == (2 * t) - 1) {
             BTreeNode s = new BTreeNode(t, false);
             s.children.add(r);
             splitChild(s, 0);
             root = s;
-            insertNonFull(s, k);
+            insertNonFull(s, k, offset);
         } else {
-            insertNonFull(r, k);
+            insertNonFull(r, k, offset);
         }
     }
 
-    private void insertNonFull(BTreeNode x, int k) {
+    private void insertNonFull(BTreeNode x, int k, int off) {
         int i = x.keys.size() - 1;
         if (x.leaf) {
             x.keys.add(k);
+            x.offset.add(off);
             Collections.sort(x.keys);
         } else {
             while (i >= 0 && k < x.keys.get(i)) {
@@ -52,7 +53,7 @@ public class BTree implements Serializable {
                     i++;
                 }
             }
-            insertNonFull(x.children.get(i), k);
+            insertNonFull(x.children.get(i), k,off);
         }
     }
 
@@ -62,8 +63,12 @@ public class BTree implements Serializable {
         BTreeNode z = new BTreeNode(t, y.leaf);
         x.children.add(i + 1, z);
         x.keys.add(i, y.keys.get(t - 1));
+        x.offset.add(i, y.offset.get(t - 1));
+        
         z.keys.addAll(y.keys.subList(t, 2 * t - 1));
+        z.offset.addAll(y.offset.subList(t, 2 * t - 1));
         y.keys.subList(t - 1, y.keys.size()).clear();
+        y.offset.subList(t - 1, y.offset.size()).clear();
         if (!y.leaf) {
             z.children.addAll(y.children.subList(t, y.children.size()));
             y.children.subList(t, y.children.size()).clear();
@@ -217,24 +222,24 @@ public class BTree implements Serializable {
         }
     }
     
-    public BTreeNode search(int k) {
+    public int search(int k) {
         if (root == null) {
-            return null;
+            return 0;
         } else {
             return search(root, k);
         }
     }
 
-    private BTreeNode search(BTreeNode x, int k) {
+    private int search(BTreeNode x, int k) {
         int i = 0;
         while (i < x.keys.size() && k > x.keys.get(i)) {
             i++;
         }
         if (i < x.keys.size() && k == x.keys.get(i)) {
-            return x;
+            return x.offset.get(i);
         }
         if (x.leaf) {
-            return null;
+            return 0;
         } else {
             return search(x.children.get(i), k);
         }

@@ -6,15 +6,19 @@ package proyectoestru2;
 
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
@@ -22,9 +26,9 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
+//import javax.xml.bind.JAXBContext;
+//import javax.xml.bind.JAXBException;
+//import javax.xml.bind.Marshaller;
 
 /**
  *
@@ -82,13 +86,9 @@ public class Proy extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         jb_nuevoArchivo3 = new javax.swing.JButton();
         jb_abrirArchivo3 = new javax.swing.JButton();
-        jb_salvarArchivo3 = new javax.swing.JButton();
-        jb_cerrarArchivo4 = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         jb_nuevoArchivo2 = new javax.swing.JButton();
         jb_abrirArchivo2 = new javax.swing.JButton();
-        jb_salvarArchivo2 = new javax.swing.JButton();
-        jb_cerrarArchivo3 = new javax.swing.JButton();
         MenuMenus = new javax.swing.JTabbedPane();
         jp_archivos = new javax.swing.JPanel();
         jp_campos = new javax.swing.JPanel();
@@ -469,20 +469,6 @@ public class Proy extends javax.swing.JFrame {
             }
         });
 
-        jb_salvarArchivo3.setText("Salvar Archivo");
-        jb_salvarArchivo3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jb_salvarArchivo3ActionPerformed(evt);
-            }
-        });
-
-        jb_cerrarArchivo4.setText("Cerrar Archivo");
-        jb_cerrarArchivo4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jb_cerrarArchivo4ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -490,8 +476,6 @@ public class Proy extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jb_cerrarArchivo4, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jb_salvarArchivo3, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jb_abrirArchivo3, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jb_nuevoArchivo3, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(30, Short.MAX_VALUE))
@@ -503,11 +487,7 @@ public class Proy extends javax.swing.JFrame {
                 .addComponent(jb_nuevoArchivo3, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jb_abrirArchivo3, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jb_salvarArchivo3, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jb_cerrarArchivo4, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(69, Short.MAX_VALUE))
+                .addContainerGap(239, Short.MAX_VALUE))
         );
 
         Menu.addTab("tab4", jPanel5);
@@ -526,20 +506,6 @@ public class Proy extends javax.swing.JFrame {
             }
         });
 
-        jb_salvarArchivo2.setText("Salvar Archivo");
-        jb_salvarArchivo2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jb_salvarArchivo2ActionPerformed(evt);
-            }
-        });
-
-        jb_cerrarArchivo3.setText("Cerrar Archivo");
-        jb_cerrarArchivo3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jb_cerrarArchivo3ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
@@ -547,8 +513,6 @@ public class Proy extends javax.swing.JFrame {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jb_cerrarArchivo3, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jb_salvarArchivo2, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jb_abrirArchivo2, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jb_nuevoArchivo2, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(30, Short.MAX_VALUE))
@@ -560,11 +524,7 @@ public class Proy extends javax.swing.JFrame {
                 .addComponent(jb_nuevoArchivo2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jb_abrirArchivo2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jb_salvarArchivo2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jb_cerrarArchivo3, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(69, Short.MAX_VALUE))
+                .addContainerGap(239, Short.MAX_VALUE))
         );
 
         Menu.addTab("tab5", jPanel6);
@@ -1419,6 +1379,43 @@ public class Proy extends javax.swing.JFrame {
                     m.setCantidad(Integer.parseInt(archivo.readLine().replaceAll("[^0-9]", "")));
                     m.setCabezaA(Integer.parseInt(archivo.readLine().replaceAll("[^0-9]", "")));
                     System.out.println(m.toString2());
+
+                    //cargar avail list
+                    if (!(m.getCabezaA() == 0)) {
+                        int cont = m.toString().length() + ((m.getCabezaA() - 1) * m.getLongitud());
+                        archivo.seek(cont);
+//                        int campocont= 0;
+//                        for (Campos lista : m.getLista()) {
+//                            if(lista.isLlaveP()){
+//                                break;
+//                            }
+//                            campocont++;
+//                        }
+                        String reg = archivo.readLine();
+                        String reg1 = "";
+                        do {
+                            for (int i = 1; i < reg.length(); i++) {
+                                if (reg.charAt(i) == '*') {
+                                    break;
+                                } else {
+                                    reg1 += reg.charAt(i);
+                                }
+                            }
+                            for (int i = 0; i < reg.length(); i++) {
+                                if (reg.charAt(i) == '$') {
+                                    System.out.println("caracter: " + reg.charAt(i));
+                                    avail.add(new NodoAvaill(Integer.parseInt(reg1), arbol.search(cont), i));
+                                    System.out.println("avail anadido: " + reg1 + "--" + arbol.search(cont));
+                                    break;
+                                }
+                            }
+                            
+                            cont = m.toString().length() + ((Integer.parseInt(reg1)-1) * m.getLongitud());
+                            reg1 = "";
+                            archivo.seek(cont);
+                        } while (!reg.equals("0"));
+
+                    }
                 }
 
             } catch (FileNotFoundException ex) {
@@ -1519,21 +1516,97 @@ public class Proy extends javax.swing.JFrame {
 
     private void jb_salvarArchivo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_salvarArchivo1ActionPerformed
 
+        String temp = "";
+        int key = Integer.parseInt(JOptionPane.showInputDialog(this, "Ingrese el registro que desea buscar"));
+        if (arbol.search(key) == 0) {
+            JOptionPane.showMessageDialog(this, "No fue encontrado");
+        } else {
+            try {
+                archivo.seek(arbol.search(key));
+                temp = archivo.readLine();
+            } catch (IOException ex) {
+                Logger.getLogger(Proy.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
         DefaultTableModel mr = new DefaultTableModel();
         for (int i = 0; i < m.getLista().size(); i++) {
             mr.addColumn(m.getLista().get(i).getNombre());
         }
-        jt_buscarR.setModel(mr);
-        int key = Integer.parseInt(JOptionPane.showInputDialog(this, "Ingrese el registro que desea buscar"));
-        if (arbol.search(key) == null) {
-            JOptionPane.showMessageDialog(this, "No fue encontrado");
-        } else {
-
+        ArrayList ping = new ArrayList();
+        String temp2 = "";
+        for (int i = 0; i < temp.length(); i++) {
+            if (temp.charAt(i) == '$') {
+                ping.add(temp2);
+                break;
+            } else if (temp.charAt(i) == '|') {
+                ping.add(temp2);
+                temp2 = "";
+            } else {
+                temp2 += temp.charAt(i);
+            }
         }
+        Object[] tempi = ping.toArray();
+        mr.addRow(tempi);
+        jt_buscarR.setModel(mr);
         jtp_registros.setSelectedIndex(2);
     }//GEN-LAST:event_jb_salvarArchivo1ActionPerformed
 
     private void jb_cerrarArchivo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_cerrarArchivo1ActionPerformed
+        String temp = "";
+        int key = Integer.parseInt(JOptionPane.showInputDialog(this, "Ingrese el registro que desea eliminar"));
+        if (arbol.search(key) == 0) {
+            JOptionPane.showMessageDialog(this, "No fue encontrado");
+        } else {
+            try {
+                archivo.seek(arbol.search(key));
+                temp = archivo.readLine();
+                archivo.seek(arbol.search(key));
+                key++;
+                System.out.println(avail.isEmpty());
+                if (avail.isEmpty()) {
+                    archivo.writeBytes("*0*");
+                    for (int i = 0; i < temp.length(); i++) {
+                        if (temp.charAt(i) == '$') {
+                            System.out.println(avail.size());
+                            avail.add(new NodoAvaill(key, arbol.search(key), i));
+                            break;
+                        }
+                    }
+                } else {
+                    int size = avail.size();
+                    avail.add(new NodoAvaill());
+                    for (int i = size - 1; i >= 0; i--) {
+                        avail.set(i + 1, avail.get(i));
+                    }
+                    archivo.writeBytes("*" + avail.get(1).getPos() + "*");
+                    for (int i = 0; i < temp.length(); i++) {
+                        if (temp.charAt(i) == '$') {
+                            System.out.println(avail.size());
+                            avail.set(0, new NodoAvaill(key, arbol.search(key), i));
+                            break;
+                        }
+                    }
+                }
+                m.setCabezaA(key);
+                m.setCantidad(m.getCantidad() - 1);
+
+            } catch (IOException ex) {
+                Logger.getLogger(Proy.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        //actualizar metadata
+        try {
+//          archivo.setLength(0);
+            archivo.seek(0);
+            if (!c.isEmpty()) {
+                m.setLista(c);
+            }
+            archivo.writeBytes(m.toString());
+
+        } catch (IOException ex) {
+            Logger.getLogger(Proy.class.getName()).log(Level.SEVERE, null, ex);
+        }
         jtp_registros.setSelectedIndex(3);
     }//GEN-LAST:event_jb_cerrarArchivo1ActionPerformed
 
@@ -1623,8 +1696,9 @@ public class Proy extends javax.swing.JFrame {
         }
         for (int i = 0; i < m.getLista().size(); i++) {
             if (m.getLista().get(i).isLlaveP()) {
-                if ((arbol.search(Integer.parseInt((String) mr.getValueAt(0, i))) == null)) {
-                    arbol.insert(Integer.parseInt((String) mr.getValueAt(0, i)));
+                if ((arbol.search(Integer.parseInt((String) mr.getValueAt(0, i))) == 0)) {
+                    arbol.insert(Integer.parseInt((String) mr.getValueAt(0, i)), (m.toString().length() + (m.getCantidad() * m.getLongitud())));
+
                     arbol.printTree();
                 } else {
                     JOptionPane.showMessageDialog(this, "Ya existe esta llave");
@@ -1652,11 +1726,7 @@ public class Proy extends javax.swing.JFrame {
                     }
                 }
                 int cont;
-                if (m.getCantidad() == 0) {
-                    cont = m.toString().length() + (m.getCantidad() * m.getLongitud());
-                } else {
-                    cont = m.toString().length() + (m.getCantidad() * m.getLongitud());
-                }
+                cont = m.toString().length() + (m.getCantidad() * m.getLongitud());
                 m.setCantidad(m.getCantidad() + 1); //actualizar cantidad
 
                 archivo.seek(cont);
@@ -1725,21 +1795,13 @@ public class Proy extends javax.swing.JFrame {
     }//GEN-LAST:event_jb_nuevoArchivo2ActionPerformed
 
     private void jb_abrirArchivo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_abrirArchivo2ActionPerformed
-        if(archivo== null){
+        if (archivo == null) {
             JOptionPane.showMessageDialog(null, "No hay un archivo abierto para poder hacerlo XML");
-        }else{
-           // JAXBContext content = JAXBContext.newInstance(classesToBeBound);
+        } else {
+            // JAXBContext content = JAXBContext.newInstance(classesToBeBound);
         }
     }//GEN-LAST:event_jb_abrirArchivo2ActionPerformed
 
-    
-    private void jb_salvarArchivo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_salvarArchivo2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jb_salvarArchivo2ActionPerformed
-
-    private void jb_cerrarArchivo3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_cerrarArchivo3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jb_cerrarArchivo3ActionPerformed
 
     private void jb_nuevoArchivo3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_nuevoArchivo3ActionPerformed
 
@@ -1766,7 +1828,7 @@ public class Proy extends javax.swing.JFrame {
                     }
                 }
                 //AQUI SE TIENE QUE CONVERTIR LA LLAVE (regi) a llave k con hash
-                arbolito.insert(k);
+                arbolito.insert(k, (m.toString().length() + (m.getCantidad() * m.getLongitud())));
                 bta2.setTree(arbolito);
                 bta2.escribirArbol();
             }
@@ -1774,14 +1836,6 @@ public class Proy extends javax.swing.JFrame {
             Logger.getLogger(Proy.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jb_abrirArchivo3ActionPerformed
-
-    private void jb_salvarArchivo3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_salvarArchivo3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jb_salvarArchivo3ActionPerformed
-
-    private void jb_cerrarArchivo4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_cerrarArchivo4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jb_cerrarArchivo4ActionPerformed
 
     private void jb_nuevoArchivo4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_nuevoArchivo4ActionPerformed
         if (jl_crearIndice.getSelectedIndex() != -1) {
@@ -1814,18 +1868,73 @@ public class Proy extends javax.swing.JFrame {
                         }
                     }
                     //AQUI SE TIENE QUE CONVERTIR LA LLAVE (regi) a llave k con hash
-                    arbolito.insert(k);
+                    arbolito.insert(k, (m.toString().length() + (m.getCantidad() * m.getLongitud())));
                     bta2.setTree(arbolito);
                     bta2.escribirArbol();
                 }
             } catch (IOException ex) {
                 Logger.getLogger(Proy.class.getName()).log(Level.SEVERE, null, ex);
             }
+
         }
     }//GEN-LAST:event_jb_nuevoArchivo4ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        //elegir el archivo de registros que va a introducir
+        JFileChooser fileChooser = new JFileChooser();
+        int returnValue = fileChooser.showOpenDialog(null);
+        if (returnValue == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = fileChooser.getSelectedFile();
+            try (BufferedReader br = new BufferedReader(new FileReader(selectedFile))) {
+                String line;
+                //los modifica para el formato que se usa
+                while ((line = br.readLine()) != null) {
+                    line = line.replace(',', '|');
+                    for (int i = line.length(); i < m.longitud - 1; i++) {
+                        line += "$";
+                    }
+                    line += "\n";
+                    int cont;
+                    if (m.getCantidad() == 0) {
+                        cont = m.toString().length() + (m.getCantidad() * m.getLongitud());
+                    } else {
+                        cont = m.toString().length() + (m.getCantidad() * m.getLongitud());
+                    }
+                    m.setCantidad(m.getCantidad() + 1); //actualizar cantidad
+
+                    archivo.seek(cont);
+                    archivo.readLine();
+                    archivo.writeBytes(line);
+                    String reg = "";
+                    for (int i = 0; i < m.longitud - 1; i++) {
+                        if (line.charAt(i) == '|') {
+                            break;
+                        } else {
+                            reg += line.charAt(i);
+                        }
+                    }
+                    System.out.println(reg);
+                    arbol.insert(Integer.parseInt(reg), cont);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            //actualizar arbol
+            try {
+                archivo.seek(0);
+                if (!c.isEmpty()) {
+                    m.setLista(c);
+                }
+                archivo.writeBytes(m.toString());
+
+            } catch (IOException ex) {
+                Logger.getLogger(Proy.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        bta.setTree(arbol);
+        bta.escribirArbol();
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
@@ -1907,8 +2016,6 @@ public class Proy extends javax.swing.JFrame {
     private javax.swing.JButton jb_cerrarArchivo;
     private javax.swing.JButton jb_cerrarArchivo1;
     private javax.swing.JButton jb_cerrarArchivo2;
-    private javax.swing.JButton jb_cerrarArchivo3;
-    private javax.swing.JButton jb_cerrarArchivo4;
     private javax.swing.JButton jb_crearCampos;
     private javax.swing.JButton jb_eliminarCampo;
     private javax.swing.JButton jb_estandarizacion;
@@ -1923,8 +2030,6 @@ public class Proy extends javax.swing.JFrame {
     private javax.swing.JButton jb_registros;
     private javax.swing.JButton jb_salvarArchivo;
     private javax.swing.JButton jb_salvarArchivo1;
-    private javax.swing.JButton jb_salvarArchivo2;
-    private javax.swing.JButton jb_salvarArchivo3;
     private javax.swing.JCheckBox jcb_llavePrimaria;
     private javax.swing.JComboBox<String> jcb_tipoDeDato;
     private javax.swing.JList<Campos> jl_crearIndice;
@@ -1960,4 +2065,5 @@ public class Proy extends javax.swing.JFrame {
     File btreeFile, holder;
     BTreeAdmin bta, bta2;
     String nomi;
+    ArrayList<NodoAvaill> avail = new ArrayList();
 }

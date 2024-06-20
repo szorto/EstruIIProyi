@@ -8,7 +8,7 @@ import java.io.Serializable;
 import static java.lang.Math.floor;
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlRootElement;
+//import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -81,14 +81,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 //    public void setLeaf(boolean leaf) {
 //        this.leaf = leaf;
 //    }
-    @XmlRootElement
+    //@XmlRootElement
     public class BTreeNode implements Serializable{
         private static final long serialVersionUID = 412L;
     int t;
     boolean leaf;
     List<Integer> keys;
     List<BTreeNode> children;
-    int offset;
+    List<Integer> offset;
 
     public BTreeNode(){
         
@@ -99,6 +99,7 @@ import javax.xml.bind.annotation.XmlRootElement;
         this.leaf = leaf;
         this.keys = new ArrayList<>();
         this.children = new ArrayList<>();
+        this.offset = new ArrayList<>();
     }
 
     public int getT() {
@@ -133,13 +134,7 @@ import javax.xml.bind.annotation.XmlRootElement;
         this.children = children;
     }
 
-    public int getOffset() {
-        return offset;
-    }
-
-    public void setOffset(int offset) {
-        this.offset = offset;
-    }
+    
     
     
 
