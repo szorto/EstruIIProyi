@@ -57,6 +57,8 @@ public class Proy extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane10 = new javax.swing.JScrollPane();
+        jTable3 = new javax.swing.JTable();
         jp_seleccion = new javax.swing.JPanel();
         jb_archivos = new javax.swing.JButton();
         jb_campos = new javax.swing.JButton();
@@ -86,6 +88,7 @@ public class Proy extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         jb_nuevoArchivo3 = new javax.swing.JButton();
         jb_abrirArchivo3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         jb_nuevoArchivo2 = new javax.swing.JButton();
         jb_abrirArchivo2 = new javax.swing.JButton();
@@ -138,6 +141,27 @@ public class Proy extends javax.swing.JFrame {
         jl_crearIndice = new javax.swing.JList<>();
         jb_nuevoArchivo4 = new javax.swing.JButton();
         jPanel12 = new javax.swing.JPanel();
+        jPanel13 = new javax.swing.JPanel();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jScrollPane9 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
+        jToggleButton1 = new javax.swing.JToggleButton();
+        jToggleButton2 = new javax.swing.JToggleButton();
+        jButton5 = new javax.swing.JButton();
+
+        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane10.setViewportView(jTable3);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(51, 51, 51));
@@ -469,15 +493,18 @@ public class Proy extends javax.swing.JFrame {
             }
         });
 
+        jButton4.setText("Cruzar archivo");
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jb_abrirArchivo3, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jb_nuevoArchivo3, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jb_abrirArchivo3, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
+                    .addComponent(jb_nuevoArchivo3, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE))
                 .addContainerGap(30, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
@@ -487,7 +514,9 @@ public class Proy extends javax.swing.JFrame {
                 .addComponent(jb_nuevoArchivo3, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jb_abrirArchivo3, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(239, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(155, Short.MAX_VALUE))
         );
 
         Menu.addTab("tab4", jPanel5);
@@ -1036,6 +1065,93 @@ public class Proy extends javax.swing.JFrame {
         );
 
         MenuMenus.addTab("Estand", jPanel12);
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane8.setViewportView(jTable1);
+
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane9.setViewportView(jTable2);
+
+        jToggleButton1.setText("Escojer Archivo");
+        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton1ActionPerformed(evt);
+            }
+        });
+
+        jToggleButton2.setText("escojer archivo");
+        jToggleButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton5.setText("Cruzar");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
+        jPanel13.setLayout(jPanel13Layout);
+        jPanel13Layout.setHorizontalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel13Layout.createSequentialGroup()
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel13Layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel13Layout.createSequentialGroup()
+                                .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 557, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jToggleButton1))
+                            .addGroup(jPanel13Layout.createSequentialGroup()
+                                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 557, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jToggleButton2))))
+                    .addGroup(jPanel13Layout.createSequentialGroup()
+                        .addGap(192, 192, 192)
+                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(31, Short.MAX_VALUE))
+        );
+        jPanel13Layout.setVerticalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel13Layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jToggleButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(45, 45, 45)
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jToggleButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(21, Short.MAX_VALUE))
+        );
+
+        MenuMenus.addTab("cruzar", jPanel13);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -1694,15 +1810,27 @@ public class Proy extends javax.swing.JFrame {
             BTreeNode nuevo = new BTreeNode(arbol.getT(), check);
             arbol.getRoot().children.add(nuevo);
         }
+        boolean contain =false;
         for (int i = 0; i < m.getLista().size(); i++) {
             if (m.getLista().get(i).isLlaveP()) {
-                if ((arbol.search(Integer.parseInt((String) mr.getValueAt(0, i))) == 0)) {
-                    arbol.insert(Integer.parseInt((String) mr.getValueAt(0, i)), (m.toString().length() + (m.getCantidad() * m.getLongitud())));
+                for (char c : ((String)mr.getValueAt(0, i)).toCharArray()) {
+                    if (Character.isLetter(c)) {
+                        contain = true;
+                        if(contain){
+                            arbol.insert(Integer.parseInt((String) mr.getValueAt(0, i)), mr.getValueAt(0, i).hashCode());
+                        }else{
+                             if ((arbol.search(Integer.parseInt((String) mr.getValueAt(0, i))) == 0)) {
+                                arbol.insert(Integer.parseInt((String) mr.getValueAt(0, i)), (m.toString().length() + (m.getCantidad() * m.getLongitud())));
 
-                    arbol.printTree();
-                } else {
-                    JOptionPane.showMessageDialog(this, "Ya existe esta llave");
+                                arbol.printTree();
+                            } else {
+                                JOptionPane.showMessageDialog(this, "Ya existe esta llave");
                 }
+                        }
+                        
+                    }
+                }
+               
 
             }
         }
@@ -1937,6 +2065,131 @@ public class Proy extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+        File fichero = null;
+        FileReader fr = null;
+        BufferedReader br = null;
+        
+        try {
+            DefaultTableModel modelo=new DefaultTableModel();
+            JFileChooser jfc = new JFileChooser("./");
+            FileNameExtensionFilter filtro = new FileNameExtensionFilter("Archivos de Texto", "txt");
+            FileNameExtensionFilter filtro2 = new FileNameExtensionFilter("Imagenes", "jpg", "png", "bmp");
+            jfc.setFileFilter(filtro);
+            jfc.addChoosableFileFilter(filtro2);            
+            int seleccion = jfc.showOpenDialog(this);
+            if (seleccion == JFileChooser.APPROVE_OPTION){
+               fichero = jfc.getSelectedFile();
+               fr = new FileReader(fichero);
+               br=new BufferedReader(fr);
+               
+               jTable2.getModel();
+               Object []linea=br.lines().toArray();
+                for (int i = 0; i < linea.length; i++) {
+                    String[]fila=linea[i].toString().split("\n");
+                    System.out.println(i+"-"+linea[i]);
+                    modelo.addColumn(fila);
+                }
+             
+            } //fin if
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            br.close();
+            fr.close();
+        } catch (IOException ex) {
+        }
+    }//GEN-LAST:event_jToggleButton1ActionPerformed
+
+    private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
+         File fichero = null;
+        FileReader fr = null;
+        BufferedReader br = null;
+        
+        try {
+            DefaultTableModel modelo=new DefaultTableModel();
+            JFileChooser jfc = new JFileChooser("./");
+            FileNameExtensionFilter filtro = new FileNameExtensionFilter("Archivos de Texto", "txt");
+            FileNameExtensionFilter filtro2 = new FileNameExtensionFilter("Imagenes", "jpg", "png", "bmp");
+            jfc.setFileFilter(filtro);
+            jfc.addChoosableFileFilter(filtro2);            
+            int seleccion = jfc.showOpenDialog(this);
+            if (seleccion == JFileChooser.APPROVE_OPTION){
+               fichero = jfc.getSelectedFile();
+               fr = new FileReader(fichero);
+               br=new BufferedReader(fr);
+               
+               jTable1.getModel();
+               Object []linea=br.lines().toArray();
+                for (int i = 0; i < linea.length; i++) {
+                    String[]fila=linea[i].toString().split("\n");
+                    System.out.println(i+"-"+linea[i]);
+                    modelo.addColumn(fila);
+                }
+             
+            } //fin if
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            br.close();
+            fr.close();
+        } catch (IOException ex) {
+        }
+    }//GEN-LAST:event_jToggleButton2ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        int[] n1;
+        int[] n2;
+        n1= jTable1.getSelectedColumns();
+        n2=jTable2.getSelectedColumns();
+        DefaultTableModel modelo=new DefaultTableModel();
+//        for (int i = 0; i < jTable1.getRowCount(); i++) {
+//            for (int j = 0; j < jTable1.getColumnCount(); j++) {
+//                modelo.setValueAt(jTable1.getValueAt(i, j), i, j);
+//            }
+//        }
+//        for (int i = 0; i < jTable2.getRowCount(); i++) {
+//            for (int j = 0; j < jTable2.getColumnCount(); j++) {
+//                modelo.setValueAt(jTable2.getValueAt(i, j), i+jTable1.getRowCount() , j);
+//            }
+//        }
+//        jTable3.setModel(modelo);
+//        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+//            DefaultTableModel model = (DefaultTableModel) model;
+//            int columnCount = model.getColumnCount();
+//            int rowCount = model.getRowCount();
+//
+//            // Escribir los nombres de las columnas
+//            for (int i = 0; i < columnCount; i++) {
+//                writer.write(model.getColumnName(i));
+//                if (i < columnCount - 1) {
+//                    writer.write("\t");  // Separador de columnas (tabulación)
+//                }
+//            }
+//            writer.newLine();
+//
+//            // Escribir los datos de la tabla
+//            for (int i = 0; i < rowCount; i++) {
+//                for (int j = 0; j < columnCount; j++) {
+//                    writer.write(model.getValueAt(i, j).toString());
+//                    if (j < columnCount - 1) {
+//                        writer.write("\t");  // Separador de columnas (tabulación)
+//                    }
+//                }
+//                writer.newLine();
+//            }
+//
+//            writer.flush();
+//            
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+    }//GEN-LAST:event_jButton5ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1978,6 +2231,8 @@ public class Proy extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
@@ -1989,6 +2244,7 @@ public class Proy extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -1998,12 +2254,20 @@ public class Proy extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane8;
+    private javax.swing.JScrollPane jScrollPane9;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
+    private javax.swing.JTable jTable3;
+    private javax.swing.JToggleButton jToggleButton1;
+    private javax.swing.JToggleButton jToggleButton2;
     private javax.swing.JButton jb_EliminarCampos;
     private javax.swing.JButton jb_ListarCampos;
     private javax.swing.JButton jb_abrirArchivo;
